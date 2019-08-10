@@ -3,14 +3,9 @@ import random
 print('Loading')
 
 
-def pause(number):
-    time.sleep(number)
-
-
 def line(string):
     print(string)
-    pause(1)
-
+    
 
 M = 1
 R = 2
@@ -35,10 +30,9 @@ births = 0
 total_deaths = 0
 total_births = 0
 
-pause(1)
 line('Loaded')
 
-while number_of_genarations != 100:
+while True:
     #Deaths
     death_check = 0
     while len(population) != death_check:
@@ -48,8 +42,8 @@ while number_of_genarations != 100:
         death_check += 1
     
     #generation of offspring
-    breedable.extend(list(filter(lambda item: item[7] >= item[6], population)))
-
+    breedable.extend(list(filter(lambda item : item[7] >= item[6], population)))
+    
     random.shuffle(breedable)
     
     if len(breedable) % 2 == 1:
@@ -79,6 +73,7 @@ while number_of_genarations != 100:
             baby.append(age)
             infant_death_yesno = random.randint(1, 100)
             if infant_death_yesno > baby[3]:
+                print(baby)
                 offspring.append(baby)
             else:
                 deaths += 1
@@ -102,9 +97,8 @@ while number_of_genarations != 100:
     breedable = []
     shuffled_breed = []
     number_of_genarations += 1
-    pause(1)
     print(number_of_genarations)
-    print(f"Number of people: {len(population)}")
+    print(f"Population: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
     print(f"Net Growth: {(births - deaths)/len(population)}%")
