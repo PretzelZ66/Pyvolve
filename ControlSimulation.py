@@ -1,5 +1,5 @@
 import time
-import random
+from random import *
 print('Loading')
 
 
@@ -70,7 +70,6 @@ while number_of_genarations != 100:
                 inherit = randint(0, 1)
                 baby.append(breedable[inherit][inherit_change])
                 inherit_change += 1
-            print(baby)
             mutationyesno = randint(1, 1000)
             if mutationyesno <= baby[5]:
                 stat = randint(0, 6)
@@ -103,6 +102,10 @@ while number_of_genarations != 100:
     breedable = []
     shuffled_breed = []
     number_of_genarations += 1
+    print(number_of_genarations)
+    print(f"Number of people: {len(population)}")
+    print(f"Deaths: {deaths}")
+    print(f"Births: {births}")
 
 print(f"Number of people: {len(population)}")
 print(f"Deaths: {deaths}")
