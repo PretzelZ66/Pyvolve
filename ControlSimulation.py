@@ -19,10 +19,10 @@ A = 3
 S = 1
 B = 1
 age = 0
-population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age],
-              [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age],
-              [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age],
-              [M, R, T, D, A ,S, B, age]]
+population = [[M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], 
+              [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age],
+              [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age],
+              [M, R, T, D, A, S, B, age]]
 offspring = []
 breedable = []
 shuffled_breed = []
@@ -37,19 +37,19 @@ line('Loaded')
 
 while number_of_genarations != 100:
     #Deaths
-    death_check = -1
+    death_check = 0
     while len(population) != death_check:
-        death_check += 1
         if population[death_check][7] == population[death_check][4]:
             del population[death_check]
             deaths += 1
+        death_check += 1
     
     #generation of offspring
-    maturation_check = -1
+    maturation_check = 0
     while len(population) != maturation_check:
-        maturation_check += 1
         if population[maturation_check][7] >= population[maturation_check][6]:
             breedable.append(population[maturation_check])
+        maturation_check += 1
     
     while len(breedable) != 0:
         delt = randint(0, (len(breedable) - 1))
@@ -89,10 +89,10 @@ while number_of_genarations != 100:
         del breedable[1]
         
     #aging of population
-    age_check = -1
+    age_check = 0
     while len(population) != age_check:
-        age_check += 1
         population[age_check][7] =+ 1
+        age_check += 1
     
     #offspring added to population
     population.extend(offspring)
