@@ -25,3 +25,17 @@ population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, 
 offspring = []
 pause(1)
 line('Loaded')
+
+while True:
+    #Deaths
+    death_check = -1
+    while len(population) != death_check:
+        death_check += 1
+        if population[death_check][7] == population[death_check][4]:
+            del population[death_check]
+    
+    #generation of offspring
+    
+    #aging of population
+    
+    #offspring added to population
