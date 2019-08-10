@@ -43,9 +43,6 @@ while True:
         maturation_check += 1
         if population[maturation_check][7] >= population[maturation_check][6]:
             breedable.append(population[maturation_check])
-        
-    if len(breedable) % 2 == 1:
-        del breedable[0]
     
     while len(breedable) != 0:
         delt = randint(0, (len(breedable) - 1))
@@ -53,25 +50,19 @@ while True:
         del breedable[delt]
     breedable = shuffled_breed
     
+    if len(breedable) % 2 == 1:
+        del breedable[0]
+    
     while len(breedable) != 0:
         littter_cap = randint(breedable[0][1], breedable[1][1])
         litter = 0
         while litter != litter_cap:
             baby = []
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][0])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][1])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][2])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][3])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][4])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][5])
-            inherit = randint(0, 1)
-            baby.append(breedable[inherit][6])
+            inherit_change = 0
+            for i in range(7):
+                inherit = randint(0, 1)
+                baby.append(breedable[inherit][0])
+                inherit_change += 1
             mutationyesno = randint(1, 1000)
             if mutationyesno <= baby[5]:
                 stat = randint(0, 6)
