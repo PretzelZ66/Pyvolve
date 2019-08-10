@@ -114,7 +114,7 @@ while number_of_genarations != 100:
     births = 0
     deaths = 0
 
-print(f"Number of people: {len(population)}")
+print(f"Population: {len(population)}")
 print(f"Deaths: {total_deaths}")
 print(f"Births: {total_births}")
-print(f"People: {population}")
+print(f"Creatures: {population}")
