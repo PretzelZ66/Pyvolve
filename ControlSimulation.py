@@ -77,7 +77,11 @@ while number_of_genarations != 100:
                 if baby[4] == 0:
                     baby[4] = 1
             baby.append(age)
-            offspring.append(baby)
+            infant_death_yesno = random.randint(1, 100)
+            if infant_death_yesno > baby[3]:
+                offspring.append(baby)
+            else:
+                deaths += 1
             baby = []
             litter += 1
             births += 1
