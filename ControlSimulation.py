@@ -1,4 +1,5 @@
 import time
+import random
 print('Loading')
 
 
@@ -23,6 +24,8 @@ population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, 
               [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age],
               [M, R, T, D, A ,S, B, age]]
 offspring = []
+breedable = []
+bred = []
 pause(1)
 line('Loaded')
 
@@ -35,7 +38,11 @@ while True:
             del population[death_check]
     
     #generation of offspring
-    
+    maturation_check = -1
+    while len(population) != maturation check:
+        maturation_check += 1
+        if population[maturation_check][7] == population[maturation_check][6]:
+            breedable.append(population[maturation_check])    
     #aging of population
     
     #offspring added to population
