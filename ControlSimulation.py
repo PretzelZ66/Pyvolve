@@ -26,17 +26,23 @@ population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, 
 offspring = []
 breedable = []
 shuffled_breed = []
+
+#facts
+number_of_genarations = 0
+deaths = 0
+births = 0
+
 pause(1)
 line('Loaded')
-number_of_genarations = 0
 
-while True:
+while number_of_genarations != 100:
     #Deaths
     death_check = -1
     while len(population) != death_check:
         death_check += 1
         if population[death_check][7] == population[death_check][4]:
             del population[death_check]
+            deaths += 1
     
     #generation of offspring
     maturation_check = -1
@@ -78,6 +84,7 @@ while True:
             offspring.append(baby)
             baby = []
             litter += 1
+            births += 1
         del breedable[0]
         del breedable[1]
         
@@ -95,4 +102,8 @@ while True:
     breedable = []
     shuffled_breed = []
     number_of_genarations += 1
-    
+
+print(f"Number of people: {len(population}"))
+print(f"Deaths: {deaths}")
+print(f"Births: {births}")
+print(f"People: {population}")
