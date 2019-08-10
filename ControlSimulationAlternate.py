@@ -1,5 +1,5 @@
 import time
-from random import *
+import random
 print('Loading')
 
 
@@ -47,8 +47,8 @@ while number_of_genarations != 100:
         death_check += 1
     
     #generation of offspring
-    breedable.extend(list(filter(lambda item: item[7] >= item[6], population)))
-
+    breedable.extend(list(filter(lambda item : item[7] >= item[6], population)))
+    
     random.shuffle(breedable)
     
     if len(breedable) % 2 == 1:
@@ -56,29 +56,30 @@ while number_of_genarations != 100:
     
     while len(breedable) != 0:
         if breedable[1][1] > breedable[0][1]:
-            litter_cap = randint(breedable[0][1], breedable[1][1])
+            litter_cap = random.randint(breedable[0][1], breedable[1][1])
         elif breedable[0][1] > breedable[1][1]:
-            litter_cap = randint(breedable[1][1], breedable[0][1])
+            litter_cap = random.randint(breedable[1][1], breedable[0][1])
         elif breedable[0][1] == breedable[1][1]:
-            litter_cap = randint(breedable[0][1], breedable[1][1]+1)
+            litter_cap = random.randint(breedable[0][1], breedable[1][1]+1)
         litter = 0
         while litter != litter_cap:
             baby = []
             inherit_change = 0
             for i in range(7):
-                inherit = randint(0, 1)
+                inherit = random.randint(0, 1)
                 baby.append(breedable[inherit][inherit_change])
                 inherit_change += 1
-            mutationyesno = randint(1, 1000)
+            mutationyesno = random.randint(1, 1000)
             if mutationyesno <= baby[5]:
-                stat = randint(0, 6)
-                change = randint(0,1)
+                stat = random.randint(0, 6)
+                change = random.randint(0,1)
                 if change == 0:
                     baby[stat] += 1
                 elif change == 1:
                     baby[stat] -= 1
                 if baby[4] == 0:
                     baby[4] = 1
+            print(baby)
             baby.append(age)
             offspring.append(baby)
             baby = []
@@ -103,7 +104,7 @@ while number_of_genarations != 100:
     number_of_genarations += 1
     pause(1)
     print(number_of_genarations)
-    print(f"Number of people: {len(population)}")
+    print(f"Population: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
     total_deaths += deaths
