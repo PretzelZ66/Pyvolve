@@ -15,9 +15,9 @@ def line(string):
 M = 1
 R = 2
 T = 10
-D = 1
+D = 3
 A = 3
-S = 1
+S = 3
 B = 1
 age = 0
 population = [[M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], 
