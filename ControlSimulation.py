@@ -110,10 +110,10 @@ while number_of_genarations != 100:
     shuffled_breed = []
     number_of_genarations += 1
     pause(1)
-    print(number_of_genarations)
-    print(f"Number of people: {len(population)}")
-    print(f"Deaths: {deaths}")
-    print(f"Births: {births}")
+    print(f'Generations: {number_of_genarations}')
+    print(f"Creature Population: {len(population)}")
+    print(f"Deaths This Generation: {deaths}")
+    print(f"Births This Generation: {births}")
     total_deaths += deaths
     total_births += births
     births = 0
