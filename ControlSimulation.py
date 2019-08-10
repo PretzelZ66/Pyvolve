@@ -25,7 +25,6 @@ population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, 
               [M, R, T, D, A ,S, B, age]]
 offspring = []
 breedable = []
-bred = []
 shuffled_breed = []
 pause(1)
 line('Loaded')
@@ -55,7 +54,40 @@ while True:
     breedable = shuffled_breed
     
     while len(breedable) != 0:
-        ???
+        littter_cap = randint(breedable[0][1], breedable[1][1])
+        litter = 0
+        while litter != litter_cap:
+            baby = []
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][0])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][1])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][2])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][3])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][4])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][5])
+            inherit = randint(0, 1)
+            baby.append(breedable[inherit][6])
+            mutationyesno = randint(1, 1000)
+            if mutationyesno <= baby[5]:
+                stat = randint(0, 6)
+                change = randint(0,1)
+                if change == 0:
+                    baby[stat]+=1
+                elif change == 1:
+                    baby[stat]-=1
+                if baby[4] == 0:
+                    baby[4]=1
+            baby.append(age)
+            offspring.append(baby)
+            baby=[]
+            litter +=1
+        del breedable[0]
+        del breedable[1]
         
     #aging of population
     age_check = -1
@@ -68,5 +100,4 @@ while True:
     #resets
     offspring = []
     breedable = []
-    bred = []
     shuffled_breed = []
