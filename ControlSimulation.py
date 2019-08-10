@@ -63,7 +63,12 @@ while number_of_genarations != 100:
         del breedable[0]
     
     while len(breedable) != 0:
-        litter_cap = randint(breedable[0][1], breedable[1][1])
+        if breedable[1][1] > breedable[0][1]:
+            litter_cap = randint(breedable[0][1], breedable[1][1])
+        elif breedable[0][1] > breedable[1][1]:
+            litter_cap = randint(breedable[1][1], breedable[0][1])
+        elif breedable[0][1] == breedable[1][1]:
+            litter_cap = randint(breedable[0][1], breedable[1][1]+1)
         litter = 0
         while litter != litter_cap:
             baby = []
