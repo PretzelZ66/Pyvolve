@@ -41,11 +41,11 @@ while True:
     maturation_check = -1
     while len(population) != maturation check:
         maturation_check += 1
-        if population[maturation_check][7] == population[maturation_check][6]:
+        if population[maturation_check][7] >= population[maturation_check][6]:
             breedable.append(population[maturation_check])
         
     if len(breedable) % 2 == 1:
-        del population[0]
+        del breedable[0]
     
     #aging of population
     
