@@ -1,5 +1,5 @@
 import time
-from random import *
+import random
 print('Loading')
 
 
@@ -56,23 +56,23 @@ while number_of_genarations != 100:
     
     while len(breedable) != 0:
         if breedable[1][1] > breedable[0][1]:
-            litter_cap = randint(breedable[0][1], breedable[1][1])
+            litter_cap = random.randint(breedable[0][1], breedable[1][1])
         elif breedable[0][1] > breedable[1][1]:
-            litter_cap = randint(breedable[1][1], breedable[0][1])
+            litter_cap = random.randint(breedable[1][1], breedable[0][1])
         elif breedable[0][1] == breedable[1][1]:
-            litter_cap = randint(breedable[0][1], breedable[1][1]+1)
+            litter_cap = random.randint(breedable[0][1], breedable[1][1]+1)
         litter = 0
         while litter != litter_cap:
             baby = []
             inherit_change = 0
             for i in range(7):
-                inherit = randint(0, 1)
+                inherit = random.randint(0, 1)
                 baby.append(breedable[inherit][inherit_change])
                 inherit_change += 1
-            mutationyesno = randint(1, 1000)
+            mutationyesno = random.randint(1, 1000)
             if mutationyesno <= baby[5]:
-                stat = randint(0, 6)
-                change = randint(0,1)
+                stat = random.randint(0, 6)
+                change = random.randint(0,1)
                 if change == 0:
                     baby[stat] += 1
                 elif change == 1:
