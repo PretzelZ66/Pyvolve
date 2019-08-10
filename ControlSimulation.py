@@ -39,7 +39,7 @@ while True:
     
     #generation of offspring
     maturation_check = -1
-    while len(population) != maturation check:
+    while len(population) != maturation_check:
         maturation_check += 1
         if population[maturation_check][7] >= population[maturation_check][6]:
             breedable.append(population[maturation_check])
@@ -47,6 +47,20 @@ while True:
     if len(breedable) % 2 == 1:
         del breedable[0]
     
+    shuffled_breed = []
+    while len(breedable) != 0:
+        delt = randint(0, (len(breedable) - 1))
+        shuffled_breed.append(breedable[delt])
+        del unshuffled[delt]
+    
+    offspring = []
+    while len(breedable) != 0:
+        ???
+        
     #aging of population
+    age_check = -1
+    while len(population) != age_check:
+        age_check += 1
+        population[age_check][7] =+ 1
     
     #offspring added to population
