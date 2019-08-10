@@ -91,7 +91,7 @@ while number_of_genarations != 100:
     #aging of population
     age_check = 0
     while len(population) != age_check:
-        population[age_check][7] =+ 1
+        population[age_check][7] += 1
         age_check += 1
     
     #offspring added to population
