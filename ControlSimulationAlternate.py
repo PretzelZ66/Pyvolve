@@ -101,6 +101,7 @@ while True:
     print(f"Population: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
+    print(f"Net Growth: {(births - deaths)/len(population)}%")
     total_deaths += deaths
     total_births += births
     births = 0
