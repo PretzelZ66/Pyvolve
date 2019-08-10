@@ -28,6 +28,7 @@ breedable = []
 shuffled_breed = []
 pause(1)
 line('Loaded')
+number_of_genarations = 0
 
 while True:
     #Deaths
@@ -68,15 +69,15 @@ while True:
                 stat = randint(0, 6)
                 change = randint(0,1)
                 if change == 0:
-                    baby[stat]+=1
+                    baby[stat] += 1
                 elif change == 1:
-                    baby[stat]-=1
+                    baby[stat] -= 1
                 if baby[4] == 0:
-                    baby[4]=1
+                    baby[4] = 1
             baby.append(age)
             offspring.append(baby)
-            baby=[]
-            litter +=1
+            baby = []
+            litter += 1
         del breedable[0]
         del breedable[1]
         
@@ -93,3 +94,5 @@ while True:
     offspring = []
     breedable = []
     shuffled_breed = []
+    number_of_genarations += 1
+    
