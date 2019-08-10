@@ -107,6 +107,7 @@ while number_of_genarations != 100:
     print(f"Number of people: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
+    print(f"Net Growth: {(births - deaths)/len(population)}%")
     total_deaths += deaths
     total_births += births
     births = 0
