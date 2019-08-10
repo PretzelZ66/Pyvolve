@@ -87,6 +87,7 @@ while True:
         population[age_check][7] =+ 1
     
     #offspring added to population
+    population.extend(offspring)
     
     #resets
     offspring = []
