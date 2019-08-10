@@ -31,6 +31,8 @@ shuffled_breed = []
 number_of_genarations = 0
 deaths = 0
 births = 0
+total_deaths = 0
+total_births = 0
 
 pause(1)
 line('Loaded')
@@ -102,12 +104,17 @@ while number_of_genarations != 100:
     breedable = []
     shuffled_breed = []
     number_of_genarations += 1
+    pause(1)
     print(number_of_genarations)
     print(f"Number of people: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
+    total_deaths += deaths
+    total_births += births
+    births = 0
+    deaths = 0
 
 print(f"Number of people: {len(population)}")
-print(f"Deaths: {deaths}")
-print(f"Births: {births}")
+print(f"Deaths: {total_deaths}")
+print(f"Births: {total_births}")
 print(f"People: {population}")
