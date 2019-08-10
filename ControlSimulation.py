@@ -61,15 +61,16 @@ while number_of_genarations != 100:
         del breedable[0]
     
     while len(breedable) != 0:
-        littter_cap = randint(breedable[0][1], breedable[1][1])
+        litter_cap = randint(breedable[0][1], breedable[1][1])
         litter = 0
         while litter != litter_cap:
             baby = []
             inherit_change = 0
             for i in range(7):
                 inherit = randint(0, 1)
-                baby.append(breedable[inherit][0])
+                baby.append(breedable[inherit][inherit_change])
                 inherit_change += 1
+            print(baby)
             mutationyesno = randint(1, 1000)
             if mutationyesno <= baby[5]:
                 stat = randint(0, 6)
@@ -86,7 +87,7 @@ while number_of_genarations != 100:
             litter += 1
             births += 1
         del breedable[0]
-        del breedable[1]
+        del breedable[0]
         
     #aging of population
     age_check = 0
