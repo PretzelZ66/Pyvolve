@@ -11,6 +11,7 @@ def line(string):
     print(string)
     pause(1)
 
+
 M = 1
 R = 2
 T = 10
@@ -64,11 +65,7 @@ while number_of_genarations != 100:
         litter = 0
         while litter != litter_cap:
             baby = []
-            inherit_change = 0
-            for i in range(7):
-                inherit = random.randint(0, 1)
-                baby.append(breedable[inherit][inherit_change])
-                inherit_change += 1
+            baby = [breedable[random.randint(0, 1)][i] for i in range(7)]
             mutationyesno = random.randint(1, 1000)
             if mutationyesno <= baby[5]:
                 stat = random.randint(0, 6)
