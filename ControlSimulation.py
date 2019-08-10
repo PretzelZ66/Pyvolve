@@ -26,6 +26,7 @@ population = [[M, R, T, D, A ,S, B, age], [M, R, T, D, A ,S, B, age], [M, R, T, 
 offspring = []
 breedable = []
 bred = []
+shuffled_breed = []
 pause(1)
 line('Loaded')
 
@@ -47,13 +48,12 @@ while True:
     if len(breedable) % 2 == 1:
         del breedable[0]
     
-    shuffled_breed = []
     while len(breedable) != 0:
         delt = randint(0, (len(breedable) - 1))
         shuffled_breed.append(breedable[delt])
-        del unshuffled[delt]
+        del breedable[delt]
+    breedable = shuffled_breed
     
-    offspring = []
     while len(breedable) != 0:
         ???
         
@@ -64,3 +64,9 @@ while True:
         population[age_check][7] =+ 1
     
     #offspring added to population
+    
+    #resets
+    offspring = []
+    breedable = []
+    bred = []
+    shuffled_breed = []
