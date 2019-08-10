@@ -32,7 +32,7 @@ total_births = 0
 
 line('Loaded')
 
-while number_of_genarations != 100:
+while True:
     #Deaths
     death_check = 0
     while len(population) != death_check:
