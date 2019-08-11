@@ -89,11 +89,11 @@ while True:
         del breedable[0]
         if len(breedable) >= (done_percentage * 0.75):
             if p_3 == 0:
-                print("   75%")
+                print("   25%")
                 p_3 = 1
         elif len(breedable) >= (done_percentage * 0.50):
             if p_2 == 0:
-                print("   75%")
+                print("   50%")
                 p_2 = 1
         elif len(breedable) >= (done_percentage * 0.25):
             if p_1 == 0:
