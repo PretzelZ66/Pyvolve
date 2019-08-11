@@ -44,12 +44,7 @@ if user_response.lower() == 'yes':
 else:
     display_pop_genome = False
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
-user_response = input('YES/NO >>>')
-if user_response.lower() == 'yes':
-    display_pop_genome = True
-else:
-    display_pop_genome = False
-    
+
 while True:
     #Deaths
     death_check = 0
