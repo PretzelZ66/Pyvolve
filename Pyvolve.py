@@ -127,11 +127,13 @@ while True:
     breedable = []
     generation += 1
     pause(1)
+    print('   ')
     print(f'Generation: {generation}')
     print(f"Population: {len(population)}")
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
     print(f"Net Growth: {(births - deaths)/len(population)}%")
+    print('   ')
     if display_pop_genome == True:
         if generation %10 == 0:
             line(population)
