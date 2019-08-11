@@ -55,6 +55,11 @@ while number_of_genarations != 100:
     if len(breedable) % 2 == 1:
         del breedable[0]
     
+    done_percentage = len(breedable)
+    p_1 = 0
+    P_2 = 0
+    p_3 = 0
+    
     while len(breedable) != 0:
         if breedable[1][1] > breedable[0][1]:
             litter_cap = random.randint(breedable[0][1], breedable[1][1])
@@ -87,6 +92,18 @@ while number_of_genarations != 100:
             births += 1
         del breedable[0]
         del breedable[0]
+        if len(breedable) >= (done_percentage * 0.75):
+            if p_3 == 0:
+                print("   75%")
+                p_3 = 1
+        elif len(breedable) >= (done_percentage * 0.50):
+            if p_2 == 0:
+                print("   75%")
+                p_2 = 1
+        elif len(breedable) >= (done_percentage * 0.25):
+            if p_1 == 0:
+                print("   75%")
+                p_1 = 1
         
     #aging of population
     age_check = 0
