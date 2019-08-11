@@ -36,6 +36,15 @@ total_births = 0
 
 pause(1)
 line('Loaded')
+line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
+line('Would you like the genomes of the population to be displayed every 10 generations?')
+line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
+user_response = input('YES/NO >>>')
+if user_response.lower() == 'yes':
+    display_pop_genome = True
+else:
+    display_pop_genome = False
+    
 
 while True:
     #Deaths
@@ -106,8 +115,9 @@ while True:
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
     print(f"Net Growth: {(births - deaths)/len(population)}%")
-    if generation %10 == 0:
-        line(population)
+    if display_pop_generation == True:
+        if generation %10 == 0:
+            line(population)
     total_deaths += deaths
     total_births += births
     births = 0
