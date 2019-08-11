@@ -38,7 +38,7 @@ pause(1)
 line('Loaded')
 line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
 line('Would you like the genomes of the population to be displayed every 10 generations?')
-user_response = input('YES/NO >>>')
+user_response = input('YES/NO >>> ')
 if user_response.lower() == 'yes':
     display_pop_genome = True
 else:
