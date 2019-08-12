@@ -56,6 +56,7 @@ Avr_B = 0
 
 pause(1)
 line('Loaded')
+print('')
 line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
 line('Would you like the genomes of the population to be displayed every 10 generations?')
 user_response = input('YES/NO >>> ')
@@ -68,6 +69,7 @@ line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 while True:
     random.shuffle(population)
     food += random.randint(5000, fpg_cap)
+    
     #feeding
     food_check = 0
     for x in range(len(population)):
@@ -75,6 +77,7 @@ while True:
             food -= 1
             population[food_check][8] = population[food_check][0]
         food_check += 1
+    
     #Starvation check
     starve_check = 0
     for x in range(len(population)):
@@ -83,6 +86,7 @@ while True:
             starve_check -= 1
             deaths += 1
         starve_check += 1
+    
     #Deaths
     death_check = 0
     while len(population) != death_check:
@@ -97,7 +101,7 @@ while True:
             death_check -= 1
         death_check += 1
 
-     #get Average
+    #Get averages
     Avr_M = Avr_Gen(population, 0)
     Avr_R = Avr_Gen(population, 1)
     Avr_T = Avr_Gen(population, 2)
@@ -108,14 +112,14 @@ while True:
 
     average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
     
-    #generation of offspring
+    #Generation of offspring
     breedable.extend(list(filter(lambda item: item[7] >= item[6], population)))
-
+    
     random.shuffle(breedable)
     
     if len(breedable) % 2 == 1:
         del breedable[0]
-
+    
     done_percentage = len(breedable)
     p_1 = 0
     p_2 = 0
@@ -176,22 +180,23 @@ while True:
     while len(population) != age_check:
         population[age_check][7] += 1
         age_check += 1
-
+    
+    #Hunger check
     hungry_check = 0
     for x in range(len(population)):
         population[hungry_check][8] -= 1
         hungry_check += 1
-    #offspring added to population
+    #Offspring added to population
     population.extend(offspring)
-
-    #Gene average
     
-    #resets
+    #Resets
     offspring = []
     breedable = []
     generation += 1
     pause(1)
-    print('   ')
+    
+    #Facts
+    print('')
     print(f'Generation: {generation}')
     print(f"Population: {len(population)}")
     print(f"Deaths: {deaths}")
@@ -199,7 +204,7 @@ while True:
     print(f"Net Growth: {(births - deaths)/len(population)}%")
     print(f'Food: {food}')
     print(f'Average Genome: {average_genome}')
-    print('   ')
+    print('---------------------------------------------')
     if display_pop_genome == True:
         if generation %10 == 0:
             line(population)
