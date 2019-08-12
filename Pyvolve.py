@@ -21,7 +21,7 @@ def Avr_Gen(The_list, gene_type):
     Average = Average // len(The_list)
     return(Average)
 
-M = 2
+M = 1
 R = 2
 T = 10
 D = 3
@@ -74,7 +74,7 @@ while True:
         if population[food_check][8] == 0:
             food -= 1
             population[food_check][8] = population[food_check][0]
-        food_check = 0
+        food_check += 1
     #Starvation check
     starve_check = 0
     for x in range(len(population)):
@@ -142,6 +142,8 @@ while True:
                     baby[stat] -= 1
                 if baby[4] == 0:
                     baby[4] = 1
+                if baby[6] == -1:
+                    baby[6] = 0
             baby.append(age)
             baby.append(fed)
             baby[8] = baby[0]
