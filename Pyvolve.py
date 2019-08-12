@@ -51,10 +51,12 @@ while True:
         death_number = random.randint(1, 100)
         if population[death_check][7] == population[death_check][4]:
             del population[death_check]
+            death_check -= 1
             deaths += 1
         elif death_number <= population[death_check][3]:
             del population[death_check]
             deaths += 1
+            death_check -= 1
         death_check += 1
     
     #generation of offspring
