@@ -11,6 +11,15 @@ def line(string):
     print(string)
     pause(1)
 
+def Avr_Gen(The_list, gene_type):
+    Gene_check = 0
+    Average = 0
+    while len(The_list) != Gene_check:
+        addition = The_list[Gene_check][gene_type]
+        Average += addition
+        Gene_check += 1
+    Average = Average // len(The_list)
+    return(Average)
 
 M = 1
 R = 2
@@ -26,12 +35,20 @@ population = [[M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, 
               [M, R, T, D, A, S, B, age]]
 offspring = []
 breedable = []
+
 #facts
 generation = 0
 deaths = 0
 births = 0
 total_deaths = 0
 total_births = 0
+Avr_M = 0
+Avr_R = 0
+Avr_T = 0
+Avr_D = 0
+Avr_A = 0
+Avr_S = 0
+Avr_B = 0
 
 pause(1)
 line('Loaded')
@@ -59,6 +76,15 @@ while True:
             deaths += 1
             death_check -= 1
         death_check += 1
+    
+    #get Average
+    Avr_M = Avr_Gen(population, 0)
+    Avr_R = Avr_Gen(population, 1)
+    Avr_T = Avr_Gen(population, 2)
+    Avr_D = Avr_Gen(population, 3)
+    Avr_A = Avr_Gen(population, 4)
+    Avr_S = Avr_Gen(population, 5)
+    Avr_B = Avr_Gen(population, 6)
     
     #generation of offspring
     breedable.extend(list(filter(lambda item: item[7] >= item[6], population)))
