@@ -21,7 +21,7 @@ def Avr_Gen(The_list, gene_type):
     Average = Average // len(The_list)
     return(Average)
 
-M = 1
+M = 2
 R = 2
 T = 10
 D = 3
@@ -29,19 +29,23 @@ A = 3
 S = 27
 B = 1
 age = 0
-population = [[M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], 
-              [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age],
-              [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age], [M, R, T, D, A, S, B, age],
-              [M, R, T, D, A, S, B, age]]
+fed = M
+population = [[M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed], 
+              [M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed],
+              [M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed], [M, R, T, D, A, S, B, age, fed],
+              [M, R, T, D, A, S, B, age, fed]]
 offspring = []
 breedable = []
+average_genome = []
 
 #facts
 generation = 0
+food = 0
 deaths = 0
 births = 0
 total_deaths = 0
 total_births = 0
+fpg_cap = 10000
 Avr_M = 0
 Avr_R = 0
 Avr_T = 0
@@ -63,6 +67,22 @@ line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
 while True:
     random.shuffle(population)
+    food += random.randint(5000, fpg_cap)
+    #feeding
+    food_check = 0
+    for x in range(len(population)):
+        if population[food_check][8] == 0:
+            food -= 1
+            population[food_check][8] = population[food_check][0]
+        food_check = 0
+    #Starvation check
+    starve_check = 0
+    for x in range(len(population)):
+        if population[starve_check][8] == 0:
+            del population[starve_check]
+            starve_check -= 1
+            deaths += 1
+        starve_check += 1
     #Deaths
     death_check = 0
     while len(population) != death_check:
@@ -76,8 +96,8 @@ while True:
             deaths += 1
             death_check -= 1
         death_check += 1
-    
-    #get Average
+
+     #get Average
     Avr_M = Avr_Gen(population, 0)
     Avr_R = Avr_Gen(population, 1)
     Avr_T = Avr_Gen(population, 2)
@@ -85,6 +105,8 @@ while True:
     Avr_A = Avr_Gen(population, 4)
     Avr_S = Avr_Gen(population, 5)
     Avr_B = Avr_Gen(population, 6)
+
+    average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
     
     #generation of offspring
     breedable.extend(list(filter(lambda item: item[7] >= item[6], population)))
@@ -121,6 +143,8 @@ while True:
                 if baby[4] == 0:
                     baby[4] = 1
             baby.append(age)
+            baby.append(fed)
+            baby[8] = baby[0]
             infant_death_yesno = random.randint(1, 100)
             if infant_death_yesno > baby[3]:
                 offspring.append(baby)
@@ -150,12 +174,16 @@ while True:
     while len(population) != age_check:
         population[age_check][7] += 1
         age_check += 1
-    
+
+    hungry_check = 0
+    for x in range(len(population)):
+        population[hungry_check][8] -= 1
+        hungry_check += 1
     #offspring added to population
     population.extend(offspring)
 
     #Gene average
-
+    
     #resets
     offspring = []
     breedable = []
@@ -167,6 +195,8 @@ while True:
     print(f"Deaths: {deaths}")
     print(f"Births: {births}")
     print(f"Net Growth: {(births - deaths)/len(population)}%")
+    print(f'Food: {food}')
+    print(f'Average Genome: {average_genome}')
     print('   ')
     if display_pop_genome == True:
         if generation %10 == 0:
