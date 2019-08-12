@@ -188,6 +188,12 @@ while True:
         hungry_check += 1
     #Offspring added to population
     population.extend(offspring)
+
+    #Dead creatures converted to food.
+    for x in range(deaths):
+        bonus_food = random.randint(0, 9)
+        if bonus_food == 3:
+            food += 1
     
     #Resets
     offspring = []
@@ -212,8 +218,3 @@ while True:
     total_births += births
     births = 0
     deaths = 0
-
-print(f"Final Population: {len(population)}")
-print(f"Total Deaths: {total_deaths}")
-print(f"Total Births: {total_births}")
-print(f"Creatures: {population}")
