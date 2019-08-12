@@ -45,6 +45,7 @@ else:
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
 while True:
+    random.shuffle(population)
     #Deaths
     death_check = 0
     while len(population) != death_check:
