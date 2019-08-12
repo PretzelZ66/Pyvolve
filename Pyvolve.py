@@ -71,7 +71,7 @@ while True:
     #feeding
     food_check = 0
     for x in range(len(population)):
-        if population[food_check][8] == 0:
+        if population[food_check][8] == 0 and food > 0:
             food -= 1
             population[food_check][8] = population[food_check][0]
         food_check += 1
