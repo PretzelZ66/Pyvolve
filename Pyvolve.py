@@ -1,0 +1,398 @@
+import time
+import random
+print('Loading')
+
+
+def pause(number):
+    time.sleep(number)
+
+
+def line(string):
+    print(string)
+    pause(1)
+
+def Avr_Gen(The_list, gene_type):
+    Gene_check = 0
+    Average = 0
+    if len(The_list) != 0:
+        while len(The_list) != Gene_check:
+            addition = The_list[Gene_check][gene_type]
+            Average += addition
+            Gene_check += 1
+        Average = Average // len(The_list)
+        return(Average)
+    return(0)
+
+M = 1
+R = 2
+T = 10
+D = 3
+A = 3
+S = 27
+B = 1
+age = 0
+fed = 0
+fatigue = 0
+population = []
+b_c = 0 #birth count
+offspring = []
+breedable = []
+average_genome = []
+pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c]
+
+#facts
+generation = 0
+deaths = 0
+births = 0
+food = 0
+fpg_cap = 10000
+breedable_count = 0
+
+temperature = 0
+temp_rate = 0.1
+temp_increase = 1
+temp_state = True
+temp_max = 5
+
+events =  0
+event_clock1 = 0
+
+Avr_M = 0
+Avr_R = 0
+Avr_T = 0
+Avr_D = 0
+Avr_A = 0
+Avr_S = 0
+Avr_B = 0
+
+pause(1)
+line('Loaded')
+print('')
+line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
+
+line('Would you like a Low (3), Medium (2), or High (1) event chance?')
+event_chance = int(input('1/2/3 >>> '))
+if event_chance > 0 and event_chance <= 3:
+    event_chance_cap = event_chance
+else:
+    event_chance_cap = 2
+event_chance_cap = event_chance_cap * 50
+
+line('What would you like the starting population to be?')
+start_pop = int(input('>>> '))
+if start_pop <= 1:
+    start_pop = 2
+pop_gen_check = 0
+while pop_gen_check != start_pop:
+    population.append(pop_template)
+    pop_gen_check += 1
+
+line('What would you like the default radiation level to be?')
+rad_param = int(input('>>> '))
+mutation_rate = rad_param
+default_mutation_rate = mutation_rate
+
+line('What would you like the mutation severity to be?')
+mutation_severity = int(input('>>> '))
+
+line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
+
+while True:
+    pause(1)
+    random.shuffle(population)
+    
+     #food changing
+    print('    Changing Food')
+    food += random.randint(5000, fpg_cap)
+    foodupdown = random.randint(-1, 1)
+    if foodupdown == -1:
+        fpg_cap -= 1000
+        if fpg_cap < 5000:
+            fpg_cap = 5000
+    elif foodupdown == 1:
+        fpg_cap += 1000
+
+    #Breedable assignment
+    print('    Sorting Breedables from Unbreedables')
+    breedable_check = 0
+    for i in range(len(population)):
+        if len(population[breedable_check]) == 12:
+            del population[breedable_check][11]
+        
+        if population[breedable_check][6] <= population[breedable_check][7] and population[breedable_check][9] == 0:
+            breedable = True
+            population[breedable_check].append(breedable)
+            breedable_count += 1
+        else:
+            breedable = False
+            population[breedable_check].append(breedable)
+        breedable_check += 1
+        
+    #Random Events
+    print('    Random event check')
+    event_check = random.randint(0, event_chance_cap)
+    if event_check == 0:
+        event = random.randint(events, 6)
+        if event == 0:
+            print('ENVIRONMENT STABILITY LOWERED')
+            event_chance_cap -= 1
+            if event_chance_cap < 0:
+                event_chance_cap -= random.randint(1, 5)
+            if event_chance_cap > 0:
+                events = 1
+                
+        elif event == 1:
+            print('LOW LEVEL RADIATION HAZARD')
+            mutation_rate += random.randint(2, 4)
+            event_clock1 += random.randint(1, 10)
+        elif event == 2:
+            print('MEDIUM LEVEL RADIATION HAZARD')
+            mutation_rate += random.randint(4, 6)
+            event_clock1 += random.randint(5, 15)
+        elif event == 3:
+            print('HIGH LEVEL RADIATION HAZARD')
+            mutation_rate += random.randint(6, 8)
+            event_clock1 += random.randint(10, 20)
+        elif event == 4:
+            print('VOLCANIC ERRUPTION')
+            temp_max += random.randint(5, 10)
+            temperature += random.randint(1, 5)
+            death_check = 0
+            while len(population) != death_check:
+                death_number = random.randint(1, 100)
+                if death_number == 13:
+                    if population[death_check][11] == True and breedable_count > 2:
+                        del population[death_check]
+                        death_check -= 1
+                        deaths += 1
+                        breedable_count -= 1
+                death_check += 1
+        elif event == 5:
+            print('FAMINE')
+            food -= random.randint(3000, 9000)
+            if food <= 0:
+                food = 0
+        
+    #Temperature Change
+    print('    Temperature Change')
+    if temp_state == True:
+        temperature += temp_rate
+    elif temp_state == False:
+        temperature -= temp_rate
+
+    if temperature >= temp_max or temperature <= 0-temp_max:
+        if temp_state == True:
+            temperature = temp_max
+            temp_state = False
+        else:
+            temperature = 0-temp_max
+            temp_state = True
+        temp_max += random.randint(1, 2)
+        temp_increase += 1
+        temp_rate = 0.1 * temp_increase
+        
+    #Temperature Deaths
+    print('    Temperature Deaths')
+    temp_check = 0
+    for i in range(len(population)):
+        if population[temp_check][2] < temperature or 0-population[temp_check][2] > temperature:
+            del population[temp_check]
+            deaths += 1
+            temp_check -= 1
+        temp_check += 1
+    
+    #Fatigue down
+    print('    Fatigue Down')
+    fatigue_check = 0
+    for x in range(len(population)):
+        if population[fatigue_check][9] > 0:
+            population[fatigue_check][9] -= 1
+        fatigue_check += 1
+    
+    #feeding
+    print('    Feeding')
+    food_check = 0
+    for x in range(len(population)):
+        if population[food_check][8] == 0 and food > 0:
+            food -= 1
+            population[food_check][8] = population[food_check][0]
+        food_check += 1
+    
+    #Starvation check
+    print('    Starvation Check')
+    starve_check = 0
+    for x in range(len(population)):
+        if population[starve_check][8] == 0:
+            del population[starve_check]
+            starve_check -= 1
+            deaths += 1
+        starve_check += 1
+    
+    #Deaths
+    print('    Deaths')
+    death_check = 0
+    while len(population) != death_check:
+        death_number = random.randint(1, 100)
+        if population[death_check][7] == population[death_check][4]:
+            del population[death_check]
+            death_check -= 1
+            deaths += 1
+        elif death_number <= population[death_check][3]:
+            del population[death_check]
+            deaths += 1
+            death_check -= 1
+        death_check += 1
+    
+    #Generation of offspring
+    print('    Generation of offspring')
+    Completed = 0
+    Past_completed = 0
+    breedable1 = []
+    breedable2 = []
+    
+    
+    while len(population) != Completed:
+        breedable1 = []
+        breedable2 = []
+        while breedable1 == []:
+            if Completed >= len(population):
+                break
+            if population[Completed][11] == True:
+                breedable1 = population[Completed]
+                Past_completed = Completed
+            Completed += 1
+        if Completed >= len(population):
+                break
+        
+        while breedable2 == []:
+            if Completed >= len(population):
+                break
+            if  population[Completed][11] == True:
+                breedable2 = population[Completed]
+                
+                break
+            Completed += 1
+        if Completed >= len(population):
+            break
+        
+        if breedable2[1] > breedable1[1]:
+            litter_cap = random.randint(breedable1[1], breedable2[1])
+        elif breedable1[1] > breedable2[1]:
+            litter_cap = random.randint(breedable2[1], breedable1[1])
+        elif breedable1[1] == breedable2[1]:
+            litter_cap = random.randint(breedable1[1], breedable2[1]+1)
+        litter = 0
+        
+        while litter != litter_cap:
+            baby = []
+            for i in range(7):
+                baby_inherit = random.randint(0, 1)
+                if baby_inherit == 0:
+                    baby.append(breedable1[i])
+                else:
+                    baby.append(breedable2[i])
+                    
+            mutationyesno = random.randint(1, 1000)
+            if mutationyesno <= baby[5]*mutation_rate:
+                stat = random.randint(0, 6)
+                change = random.randint(0,1)
+                if change == 0:
+                    baby[stat] += random.randint(1, mutation_severity)
+                elif change == 1:
+                    baby[stat] -= random.randint(1, mutation_severity)
+                
+                if baby[1] <= 0:
+                    baby[1] = 1
+                if baby[4] <= 0:
+                    baby[4] = 1
+                if baby[6] <= -1:
+                    baby[6] = 0
+            baby.append(age)
+            baby.append(fed)
+            baby.append(fatigue)
+            baby.append(b_c)
+            
+            infant_death_yesno = random.randint(1, 100)
+            if infant_death_yesno > baby[3]:
+                offspring.append(baby)
+            else:
+                deaths += 1
+            baby = []
+            litter += 1
+            births += 1
+        F_Added = random.randint(1, 2)
+        population[Completed][9] = (F_Added + population[Completed][10])
+        population[Past_completed][9] = (F_Added + population[Past_completed][10])
+        population[Completed][10] += 1
+        population[Past_completed][10] += 1
+        
+        Completed += 1
+        
+    #aging of population
+    print('    Aging of population')
+    age_check = 0
+    while len(population) != age_check:
+        population[age_check][7] += 1
+        age_check += 1
+    
+    #Hunger check
+    print('    Hunger check')
+    hungry_check = 0
+    for x in range(len(population)):
+        population[hungry_check][8] -= 1
+        hungry_check += 1
+    
+    #Offspring added to population
+    print('    Offspring added to population')
+    population.extend(offspring)
+    
+    #Get averages
+    print('    Getting average genes')
+    Avr_M = Avr_Gen(population, 0)
+    Avr_R = Avr_Gen(population, 1)
+    Avr_T = Avr_Gen(population, 2)
+    Avr_D = Avr_Gen(population, 3)
+    Avr_A = Avr_Gen(population, 4)
+    Avr_S = Avr_Gen(population, 5)
+    Avr_B = Avr_Gen(population, 6)
+
+    average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
+
+    #Dead creatures converted to food.
+    print('    Dead creatures converted to food')
+    for x in range(deaths):
+        bonus_food = random.randint(0, 19)
+        if bonus_food == 0:
+            food += 1
+    
+    #Resets
+    print('    Resets')
+    offspring = []
+    generation += 1
+    breedable_count = 0
+    
+    #Event clocks
+    print('    Event Clocks')
+    if event_clock1 > 0:
+        event_clock1 -= 1
+        if event_clock1 == 0:
+            mutation_rate = default_mutation_rate
+    
+    #Facts
+    print('---------------------------------------------')
+    print(f'Generation: {generation}')
+    print(f"Population: {len(population)}")
+    print(f"Deaths: {deaths}")
+    print(f"Births: {births}")
+    if len(population) != 0:
+        print(f"Net Growth: {(births - deaths)/len(population)}%")
+    else:
+        print("Net Growth: -100%")
+    print(f'Food: {food}')
+    print(f'Temperature: {temperature}')
+    print(f'Average Genome: {average_genome}')
+    print('---------------------------------------------')
+    if len(population) == 0:
+        print("EVERY THING DIED")
+        time.sleep(20)
+        break
