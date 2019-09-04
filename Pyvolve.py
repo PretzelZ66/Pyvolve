@@ -438,15 +438,15 @@ while True:
         temp = str(temperature) + '\n'
         infect_count = str(Virus.infected) + '\n'
         avg_genes = str(average_genome) + '\n'
-        output.write(gen)
-        output.write(pop)
-        output.write(dead)
-        output.write(birthed)
-        output.write(net_growth)
-        output.write(food_count)
-        output.write(temp)
-        output.write(infect_count)
-        output.write(avg_genes)
+        output.write(f'Generation: {gen}')
+        output.write(f'Population: {pop}')
+        output.write(f'Deaths: {dead}')
+        output.write(f'Births: {birthed}')
+        output.write(f'Net Growth: {net_growth}')
+        output.write(f'Food: {food_count}')
+        output.write(f'Temperature: {temp}')
+        output.write(f'Infected: {infect_count}')
+        output.write(f'Average Genome: {avg_genes}')
         output.write('\n')
         output.close()
         
