@@ -105,11 +105,9 @@ mutation_severity = int(input('>>> '))
 
 line('How many creatures would you like to start out with the virus?')
 infect_counter = int(input('>>> '))
-    
-print(population)
+
 pop_gen_check = 0
 while pop_gen_check != start_pop:
-    print(infect_counter, Virus.infected)
     if infect_counter != Virus.infected:
         contaminated = True
         Virus.infected += 1
@@ -119,7 +117,6 @@ while pop_gen_check != start_pop:
     pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c, contaminated]
     population.append(pop_template)
     pop_gen_check += 1
-print(population)
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
@@ -439,6 +436,7 @@ while True:
         net_growth = f'{(births - deaths)/len(population)}%\n'
         food_count = str(food) +'\n'
         temp = str(temperature) + '\n'
+        infect_count = str(Virus.infected) + '\n'
         avg_genes = str(average_genome) + '\n'
         output.write(gen)
         output.write(pop)
