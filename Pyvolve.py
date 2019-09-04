@@ -445,6 +445,7 @@ while True:
         output.write(net_growth)
         output.write(food_count)
         output.write(temp)
+        output.write(infect_count)
         output.write(avg_genes)
         output.write('\n')
         output.close()
