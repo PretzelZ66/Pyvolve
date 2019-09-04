@@ -82,6 +82,11 @@ file_name += '.txt'
 with open(file_name, 'x') as file:
     file.close()
 
+line('What would you like the starting population to be?')
+start_pop = int(input('>>> '))
+if start_pop <= 1:
+    start_pop = 2
+
 line('Would you like a Low (3), Medium (2), or High (1) event chance?')
 event_chance = int(input('1/2/3 >>> '))
 if event_chance > 0 and event_chance <= 3:
@@ -90,15 +95,6 @@ else:
     event_chance_cap = 2
 event_chance_cap = event_chance_cap * 50
 
-line('What would you like the starting population to be?')
-start_pop = int(input('>>> '))
-if start_pop <= 1:
-    start_pop = 2
-pop_gen_check = 0
-while pop_gen_check != start_pop:
-    population.append(pop_template)
-    pop_gen_check += 1
-
 line('What would you like the default radiation level to be?')
 rad_param = int(input('>>> '))
 mutation_rate = rad_param
@@ -106,18 +102,24 @@ default_mutation_rate = mutation_rate
 
 line('What would you like the mutation severity to be?')
 mutation_severity = int(input('>>> '))
-print(population)
 
 line('How many creatures would you like to start out with the virus?')
 infect_counter = int(input('>>> '))
-if infect_counter > len(population):
-    infect_counter = len(population)
-while Virus.infected != infect_counter:
-    population[Virus.infected][11] = True
-    print(population[Virus.infected])
-    Virus.infected += 1
-print(population)
     
+print(population)
+pop_gen_check = 0
+while pop_gen_check != start_pop:
+    print(infect_counter, Virus.infected)
+    if infect_counter != Virus.infected:
+        contaminated = True
+        Virus.infected += 1
+    else:
+        contaminated = False
+    
+    pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c, contaminated]
+    population.append(pop_template)
+    pop_gen_check += 1
+print(population)
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
