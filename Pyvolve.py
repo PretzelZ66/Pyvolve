@@ -33,12 +33,13 @@ B = 1
 age = 0
 fed = 0
 fatigue = 0
-population = []
 b_c = 0 #birth count
+contaminated = False
+population = []
 offspring = []
 breedable = []
 average_genome = []
-pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c]
+pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c, contaminated]
 
 #facts
 generation = 0
@@ -63,7 +64,12 @@ Avr_T = 0
 Avr_D = 0
 Avr_A = 0
 Avr_S = 0
-Avr_B = 0
+Avr_B = 0    
+
+debugcounter = 0
+
+class Virus:
+    infected = 0
 
 pause(1)
 line('Loaded')
@@ -94,6 +100,18 @@ default_mutation_rate = mutation_rate
 
 line('What would you like the mutation severity to be?')
 mutation_severity = int(input('>>> '))
+print(population)
+
+line('How many creatures would you like to start out with the virus?')
+infect_counter = int(input('>>> '))
+if infect_counter > len(population):
+    infect_counter = len(population)
+while Virus.infected != infect_counter:
+    population[Virus.infected][11] = True
+    print(population[Virus.infected])
+    Virus.infected += 1
+print(population)
+    
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
@@ -101,7 +119,7 @@ while True:
     pause(1)
     random.shuffle(population)
     
-     #food changing
+    #food changing
     print('    Changing Food')
     food += random.randint(5000, fpg_cap)
     foodupdown = random.randint(-1, 1)
@@ -116,8 +134,8 @@ while True:
     print('    Sorting Breedables from Unbreedables')
     breedable_check = 0
     for i in range(len(population)):
-        if len(population[breedable_check]) == 12:
-            del population[breedable_check][11]
+        if len(population[breedable_check]) == 13:
+            del population[breedable_check][12]
         
         if population[breedable_check][6] <= population[breedable_check][7] and population[breedable_check][9] == 0:
             breedable = True
@@ -161,7 +179,7 @@ while True:
             while len(population) != death_check:
                 death_number = random.randint(1, 100)
                 if death_number == 13:
-                    if population[death_check][11] == True and breedable_count > 2:
+                    if population[death_check][12] == True and breedable_count > 2:
                         del population[death_check]
                         death_check -= 1
                         deaths += 1
@@ -236,7 +254,6 @@ while True:
         if population[death_check][7] == population[death_check][4]:
             del population[death_check]
             death_check -= 1
-            deaths += 1
         elif death_number <= population[death_check][3]:
             del population[death_check]
             deaths += 1
@@ -257,7 +274,7 @@ while True:
         while breedable1 == []:
             if Completed >= len(population):
                 break
-            if population[Completed][11] == True:
+            if population[Completed][12] == True:
                 breedable1 = population[Completed]
                 Past_completed = Completed
             Completed += 1
@@ -267,11 +284,10 @@ while True:
         while breedable2 == []:
             if Completed >= len(population):
                 break
-            if  population[Completed][11] == True:
+            if  population[Completed][12] == True:
                 breedable2 = population[Completed]
-                
                 break
-            Completed += 1
+            
         if Completed >= len(population):
             break
         
@@ -311,6 +327,12 @@ while True:
             baby.append(fed)
             baby.append(fatigue)
             baby.append(b_c)
+            
+            if breedable1[11] == True or breedable2[11] == True:
+                contaminated = True
+            else:
+                contaminated = False
+            baby.append(contaminated)
             
             infant_death_yesno = random.randint(1, 100)
             if infant_death_yesno > baby[3]:
@@ -364,12 +386,20 @@ while True:
         bonus_food = random.randint(0, 19)
         if bonus_food == 0:
             food += 1
+
+    #Infected Check
+    print('    Checking for infection')
+    Virus.infected = 0
+    for i in range(len(population)):
+        if population[i][11] == True:
+            Virus.infected += 1
     
     #Resets
     print('    Resets')
     offspring = []
     generation += 1
     breedable_count = 0
+    debugcounter = 0
     
     #Event clocks
     print('    Event Clocks')
@@ -390,6 +420,7 @@ while True:
         print("Net Growth: -100%")
     print(f'Food: {food}')
     print(f'Temperature: {temperature}')
+    print(f'Infected: {Virus.infected}')
     print(f'Average Genome: {average_genome}')
     print('---------------------------------------------')
     if len(population) == 0:
