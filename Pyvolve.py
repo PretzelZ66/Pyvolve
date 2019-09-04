@@ -76,6 +76,12 @@ line('Loaded')
 print('')
 line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
 
+line('What would you like to call the results file?')
+file_name = input('>>> ')
+file_name += '.txt'
+with open(file_name, 'x') as file:
+    file.close()
+
 line('Would you like a Low (3), Medium (2), or High (1) event chance?')
 event_chance = int(input('1/2/3 >>> '))
 if event_chance > 0 and event_chance <= 3:
@@ -423,6 +429,26 @@ while True:
     print(f'Infected: {Virus.infected}')
     print(f'Average Genome: {average_genome}')
     print('---------------------------------------------')
+    with open(file_name, 'a') as output:
+        gen = str(generation) + '\n'
+        pop = str(len(population)) + '\n'
+        dead = str(deaths) + '\n'
+        birthed = str(births) + '\n'
+        net_growth = f'{(births - deaths)/len(population)}%\n'
+        food_count = str(food) +'\n'
+        temp = str(temperature) + '\n'
+        avg_genes = str(average_genome) + '\n'
+        output.write(gen)
+        output.write(pop)
+        output.write(dead)
+        output.write(birthed)
+        output.write(net_growth)
+        output.write(food_count)
+        output.write(temp)
+        output.write(avg_genes)
+        output.write('\n')
+        output.close()
+        
     if len(population) == 0:
         print("EVERY THING DIED")
         time.sleep(20)
