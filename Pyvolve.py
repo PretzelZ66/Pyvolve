@@ -292,6 +292,8 @@ while True:
             if  population[Completed][12] == True:
                 breedable2 = population[Completed]
                 break
+            Completed += 1
+            print('AAAAAAAAA')
             
         if Completed >= len(population):
             break
@@ -429,24 +431,15 @@ while True:
     print(f'Average Genome: {average_genome}')
     print('---------------------------------------------')
     with open(file_name, 'a') as output:
-        gen = str(generation) + '\n'
-        pop = str(len(population)) + '\n'
-        dead = str(deaths) + '\n'
-        birthed = str(births) + '\n'
-        net_growth = f'{(births - deaths)/len(population)}%\n'
-        food_count = str(food) +'\n'
-        temp = str(temperature) + '\n'
-        infect_count = str(Virus.infected) + '\n'
-        avg_genes = str(average_genome) + '\n'
-        output.write(f'Generation: {gen}')
-        output.write(f'Population: {pop}')
-        output.write(f'Deaths: {dead}')
-        output.write(f'Births: {birthed}')
-        output.write(f'Net Growth: {net_growth}')
-        output.write(f'Food: {food_count}')
-        output.write(f'Temperature: {temp}')
-        output.write(f'Infected: {infect_count}')
-        output.write(f'Average Genome: {avg_genes}')
+        output.write(f'Generation: {generation}\n')
+        output.write(f'Population: {len(population)}\n')
+        output.write(f"Deaths: {deaths}\n")
+        output.write(f'Births: {births}\n')
+        output.write(f'Net Growth: {(births - deaths)/len(population)}%\n')
+        output.write(f'Food: {food}\n')
+        output.write(f'Temperature: {temperature}\n')
+        output.write(f'Infected: {Virus.infected}\n')
+        output.write(f'Average Genome: {average_genome}\n')
         output.write('\n')
         output.close()
         
