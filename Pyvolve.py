@@ -64,12 +64,12 @@ Avr_T = 0
 Avr_D = 0
 Avr_A = 0
 Avr_S = 0
-Avr_B = 0    
-
-debugcounter = 0
+Avr_B = 0
 
 class Virus:
     infected = 0
+    kill_chance = 5
+    mutaion_chance = 1
 
 pause(1)
 line('Loaded')
@@ -121,6 +121,7 @@ while pop_gen_check != start_pop:
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
 while True:
+    deaths = 0
     pause(1)
     random.shuffle(population)
     
@@ -153,31 +154,33 @@ while True:
         
     #Random Events
     print('    Random event check')
+    event_done = ''
     event_check = random.randint(0, event_chance_cap)
+    event_check = 0
     if event_check == 0:
-        event = random.randint(events, 6)
+        event = random.randint(events, 5)
         if event == 0:
-            print('ENVIRONMENT STABILITY LOWERED')
+            event_done = 'ENVIRONMENT STABILITY LOWERED'
             event_chance_cap -= 1
-            if event_chance_cap < 0:
-                event_chance_cap -= random.randint(1, 5)
             if event_chance_cap > 0:
+                event_chance_cap -= random.randint(1, 5)
+            if event_chance_cap < 0:
                 events = 1
                 
         elif event == 1:
-            print('LOW LEVEL RADIATION HAZARD')
+            event_done = 'LOW LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(2, 4)
             event_clock1 += random.randint(1, 10)
         elif event == 2:
-            print('MEDIUM LEVEL RADIATION HAZARD')
+            event_done = 'MEDIUM LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(4, 6)
             event_clock1 += random.randint(5, 15)
         elif event == 3:
-            print('HIGH LEVEL RADIATION HAZARD')
+            event_done = 'HIGH LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(6, 8)
             event_clock1 += random.randint(10, 20)
         elif event == 4:
-            print('VOLCANIC ERRUPTION')
+            event_done = 'VOLCANIC ERRUPTION'
             temp_max += random.randint(5, 10)
             temperature += random.randint(1, 5)
             death_check = 0
@@ -191,10 +194,11 @@ while True:
                         breedable_count -= 1
                 death_check += 1
         elif event == 5:
-            print('FAMINE')
+            event_done = 'FAMINE'
             food -= random.randint(3000, 9000)
             if food <= 0:
                 food = 0
+        print(event_done)
         
     #Temperature Change
     print('    Temperature Change')
@@ -251,6 +255,17 @@ while True:
             deaths += 1
         starve_check += 1
     
+    #Virus Deaths
+    print('    Virus Killing')
+    Virus_check = 0
+    for x in range(len(population)):
+        Virus_chance = random.randint(1, 100)
+        if Virus_chance <= Virus.kill_chance:
+            del population[Virus_check]
+            Virus_check -= 1
+            deaths += 1
+        Virus_check += 1
+    
     #Deaths
     print('    Deaths')
     death_check = 0
@@ -267,6 +282,7 @@ while True:
     
     #Generation of offspring
     print('    Generation of offspring')
+    births = 0
     Completed = 0
     Past_completed = 0
     breedable1 = []
@@ -293,7 +309,6 @@ while True:
                 breedable2 = population[Completed]
                 break
             Completed += 1
-            print('AAAAAAAAA')
             
         if Completed >= len(population):
             break
@@ -375,6 +390,20 @@ while True:
     print('    Offspring added to population')
     population.extend(offspring)
     
+    #Virus Mutation
+    print('    Mutating virus')
+    Virus_mutation = random.randint(1, 100)
+    if Virus.mutaion_chance >= Virus_mutation:
+        Virus_Decider = random.randint(1, 2)
+        change = random.randint(1, 2)
+        if change == 2:
+            change = -1
+        
+        if Virus_Decider == 1:
+            Virus.kill_chance += change
+        elif Virus_Decider == 1:
+            Virus.mutaion_chance += change
+    
     #Get averages
     print('    Getting average genes')
     Avr_M = Avr_Gen(population, 0)
@@ -387,15 +416,17 @@ while True:
 
     average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
 
+    Virus_genome = [Virus.kill_chance, Virus.mutaion_chance]
+
     #Dead creatures converted to food.
     print('    Dead creatures converted to food')
     for x in range(deaths):
         bonus_food = random.randint(0, 19)
         if bonus_food == 0:
             food += 1
-
-    #Infected Check
-    print('    Checking for infection')
+    
+    #Virus Check
+    print('    Checking for virus')
     Virus.infected = 0
     for i in range(len(population)):
         if population[i][11] == True:
@@ -406,7 +437,6 @@ while True:
     offspring = []
     generation += 1
     breedable_count = 0
-    debugcounter = 0
     
     #Event clocks
     print('    Event Clocks')
@@ -427,23 +457,31 @@ while True:
         print("Net Growth: -100%")
     print(f'Food: {food}')
     print(f'Temperature: {temperature}')
-    print(f'Infected: {Virus.infected}')
+    print(f'Virus infected: {Virus.infected}')
     print(f'Average Genome: {average_genome}')
+    print(f'Virus Genome: {Virus_genome}')
     print('---------------------------------------------')
     with open(file_name, 'a') as output:
         output.write(f'Generation: {generation}\n')
         output.write(f'Population: {len(population)}\n')
         output.write(f"Deaths: {deaths}\n")
         output.write(f'Births: {births}\n')
-        output.write(f'Net Growth: {(births - deaths)/len(population)}%\n')
+        if len(population) != 0:
+            output.write(f'Net Growth: {(births - deaths)/len(population)}%\n')
+        else:
+            output.write("Net Growth: -100%\n")
         output.write(f'Food: {food}\n')
         output.write(f'Temperature: {temperature}\n')
         output.write(f'Infected: {Virus.infected}\n')
         output.write(f'Average Genome: {average_genome}\n')
-        output.write('\n')
+        output.write(f'Virus Genome: {Virus_genome}\n')
+        if event_done != "":
+            output.write(f'Event: {event_done}\n')
+        output.write('---------------------------------------------\n')
+        if len(population) == 0:
+            output.write("EVERY THING DIED\n")
         output.close()
         
     if len(population) == 0:
         print("EVERY THING DIED")
-        time.sleep(20)
         break
