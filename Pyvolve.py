@@ -78,8 +78,11 @@ line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
 
 line('What would you like to call the results file?')
 file_name = input('>>> ')
+file_name_raw = file_name + '_raw.txt'
 file_name += '.txt'
 with open(file_name, 'x') as file:
+    file.close()
+with open(file_name_raw, 'x') as file:
     file.close()
 
 line('What would you like the starting population to be?')
@@ -158,7 +161,7 @@ while True:
     event_check = random.randint(0, event_chance_cap)
     event_check = 0
     if event_check == 0:
-        event = random.randint(events, 5)
+        event = random.randint(events, 6)
         if event == 0:
             event_done = 'ENVIRONMENT STABILITY LOWERED'
             event_chance_cap -= 1
@@ -198,6 +201,14 @@ while True:
             food -= random.randint(3000, 9000)
             if food <= 0:
                 food = 0
+        elif event == 6:
+            event_done = 'PLAGUE'
+            Plague_check = 0
+            while len(population) != Plague_check:
+                death_number = random.randint(0, 100)
+                if death_number == 0:
+                    population[Plague_check][11] = True
+                    Plague_check += 1
         print(event_done)
         
     #Temperature Change
@@ -481,7 +492,19 @@ while True:
         if len(population) == 0:
             output.write("EVERY THING DIED\n")
         output.close()
-        
+    with open(file_name_raw, 'a') as output:
+        output.write(f'{generation}\n')
+        output.write(f'{len(population)}\n')
+        output.write(f"{deaths}\n")
+        output.write(f'{births}\n')
+        if len(population) != 0:
+            output.write(f'{(births - deaths)/len(population)}%\n')
+        else:
+            output.write("-100%\n")
+        output.write(f'{food}\n')
+        output.write(f'{temperature}\n')
+        output.write(f'{Virus.infected}\n')
+        output.close()
     if len(population) == 0:
         print("EVERY THING DIED")
         break
