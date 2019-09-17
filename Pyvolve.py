@@ -1,3 +1,4 @@
+#Pyvolve 1.2.0
 import time, random
 print('Loading')
 
@@ -158,7 +159,6 @@ while True:
     print('    Random event check')
     event_done = ''
     event_check = random.randint(0, event_chance_cap)
-    event_check = 0
     if event_check == 0:
         event = random.randint(events, 6)
         if event == 0:
