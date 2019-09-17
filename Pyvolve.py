@@ -85,29 +85,39 @@ with open(file_name, 'x') as file:
 with open(file_name_raw, 'x') as file:
     file.close()
 
-line('What would you like the starting population to be?')
-start_pop = int(input('>>> '))
-if start_pop <= 1:
-    start_pop = 2
+line('Would you like to use the default parameters? Y/N')
+what_parameters = input('>>> ')
 
-line('Would you like a Low (3), Medium (2), or High (1) event chance?')
-event_chance = int(input('1/2/3 >>> '))
-if event_chance > 0 and event_chance <= 3:
-    event_chance_cap = event_chance
+if what_parameters.lower() == 'y':
+    start_pop = 50
+    event_chance_cap = 100
+    mutation_rate = 1
+    default_mutation_rate = mutation_rate
+    mutation_severity = 1
+    infect_counter = 1
 else:
-    event_chance_cap = 2
-event_chance_cap = event_chance_cap * 50
+    line('What would you like the starting population to be?')
+    start_pop = int(input('>>> '))
+    if start_pop <= 1:
+        start_pop = 2
 
-line('What would you like the default radiation level to be?')
-rad_param = int(input('>>> '))
-mutation_rate = rad_param
-default_mutation_rate = mutation_rate
+    line('Would you like a Low (3), Medium (2), or High (1) event chance?')
+    event_chance = int(input('1/2/3 >>> '))
+    if event_chance > 0 and event_chance <= 3:
+        event_chance_cap = event_chance
+    else:
+        event_chance_cap = 2
+    event_chance_cap = event_chance_cap * 50
+    
+    line('What would you like the default radiation level to be?')
+    mutation_rate = int(input('>>> '))
+    default_mutation_rate = mutation_rate
 
-line('What would you like the mutation severity to be?')
-mutation_severity = int(input('>>> '))
+    line('What would you like the mutation severity to be?')
+    mutation_severity = int(input('>>> '))
 
-line('How many creatures would you like to start out with the virus?')
-infect_counter = int(input('>>> '))
+    line('How many creatures would you like to start out with the virus?')
+    infect_counter = int(input('>>> '))
 
 pop_gen_check = 0
 while pop_gen_check != start_pop:
