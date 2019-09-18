@@ -439,8 +439,7 @@ while True:
     
     #Virus Mutation
     print('    Mutating virus')
-    Virus_mutation = random.randint(1, 100)
-    if Virus.mutaion_chance >= Virus_mutation:
+    if Virus.mutaion_chance >= random.randint(1, 100):
         Virus_Decider = random.randint(1, 2)
         change = random.randint(1, 2)
         if change == 2:
@@ -468,8 +467,7 @@ while True:
     #Dead creatures converted to food.
     print('    Dead creatures converted to food')
     for x in range(deaths):
-        bonus_food = random.randint(0, 19)
-        if bonus_food == 0:
+        if random.randint(1, 20) == 1:
             food += 1
     #Virus Curing
     print('    Curing virus')
