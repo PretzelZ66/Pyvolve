@@ -534,6 +534,7 @@ while True:
     print(f'Average Genome: {average_genome}')
     print(f'Virus Genome: {Virus_genome}')
     print('---------------------------------------------')
+    
     with open(file_name, 'a') as output:
         output.write(f'Generation: {generation}\n')
         output.write(f'Population: {len(population)}\n')
@@ -554,6 +555,7 @@ while True:
         if len(population) == 0:
             output.write("EVERY THING DIED\n")
         output.close()
+    
     with open(file_name_raw, 'a') as output:
         output.write(f'{generation}\n')
         output.write(f'{len(population)}\n')
@@ -566,7 +568,15 @@ while True:
         output.write(f'{food}\n')
         output.write(f'{temperature}\n')
         output.write(f'{Virus.infected}\n')
+        output.write(f'{average_genome[0]}\n')
+        output.write(f'{average_genome[1]}\n')
+        output.write(f'{average_genome[2]}\n')
+        output.write(f'{average_genome[3]}\n')
+        output.write(f'{average_genome[4]}\n')
+        output.write(f'{average_genome[5]}\n')
+        output.write(f'{average_genome[6]}\n')
         output.close()
+    
     if len(population) == 0:
         print("EVERY THING DIED")
         break
