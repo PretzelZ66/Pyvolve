@@ -70,6 +70,7 @@ class Virus:
     infected = 0
     kill_chance = 5
     mutaion_chance = 1
+    infectiousness = 5
     
 class Presets:
     def __init__(self):
@@ -415,7 +416,9 @@ while True:
             baby.append(b_c)
             
             if breedable1[11] == True or breedable2[11] == True:
-                contaminated = True
+                willinfect = random.randint(0, 99)
+                if willinfect <= Virus.infectiousness:
+                    contaminated = True
             else:
                 contaminated = False
             baby.append(contaminated)
@@ -457,7 +460,7 @@ while True:
     #Virus Mutation
     print('    Mutating virus')
     if Virus.mutaion_chance >= random.randint(1, 100):
-        Virus_Decider = random.randint(1, 2)
+        Virus_Decider = random.randint(1, 3)
         change = random.randint(1, 2)
         if change == 2:
             change = -1
@@ -466,6 +469,8 @@ while True:
             Virus.kill_chance += change
         elif Virus_Decider == 1:
             Virus.mutaion_chance += change
+        elif Virus_Decider == 2:
+            Virus.infectiousness +=  change
     
     #Get averages
     print('    Getting average genes')
