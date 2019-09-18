@@ -112,16 +112,33 @@ with open(file_name, 'x') as file:
 with open(file_name_raw, 'x') as file:
     file.close()
 
-line('Would you like to use the default parameters? Y/N')
-what_parameters = input('>>> ')
+line('What preset would you like to use? Default(0), Nuclear Playground(1), Thermonuclear Playground(2), Custom(OTHER)')
+preset_type = int(input('>>> '))
 
-if what_parameters.lower() == 'y':
+if preset_type == 0:
     start_pop = 50
     event_chance_cap = 100
     mutation_rate = 1
     default_mutation_rate = mutation_rate
     mutation_severity = 1
     infect_counter = 1
+    
+elif preset_type == 1:
+    start_pop = nuclear_playground.start_pop
+    event_chance_cap = nuclear_playground.event_chance_cap
+    mutation_rate = nuclear_playground.mutation_rate
+    default_mutation_rate = nuclear_playground.default_mutation_rate
+    mutation_severity = nuclear_playground.mutation_severity
+    infect_counter = nuclear_playground.infect_counter
+
+elif preset_type == 2:
+    start_pop = thermonuclear_playground.start_pop
+    event_chance_cap = thermonuclear_playground.event_chance_cap
+    mutation_rate = thermonuclear_playground.mutation_rate
+    default_mutation_rate = thermonuclear_playground.default_mutation_rate
+    mutation_severity = thermonuclear_playground.mutation_severity
+    infect_counter = thermonuclear_playground.infect_counter
+    
 else:
     line('What would you like the starting population to be?')
     start_pop = int(input('>>> '))
