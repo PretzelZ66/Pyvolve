@@ -471,6 +471,12 @@ while True:
         bonus_food = random.randint(0, 19)
         if bonus_food == 0:
             food += 1
+    #Virus Curing
+    print('    Curing virus')
+    for i in range(len(population)):
+        if population[i][11] == True:
+            if random.randint(1, 100) == 1:
+                population[i][11] = False
     
     #Virus Check
     print('    Checking for virus')
