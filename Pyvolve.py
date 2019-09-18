@@ -70,6 +70,33 @@ class Virus:
     infected = 0
     kill_chance = 5
     mutaion_chance = 1
+    
+class Presets:
+    def __init__(self):
+        self.start_pop = 0
+        self.event_chance_cap = 0
+        self.mutation_rate = 0
+        self.default_mutation_rate = 0
+        self.mutation_severity = 0
+        self.infect_counter = 0
+
+
+#Preset Definition
+nuclear_playground = Presets
+nuclear_playground.start_pop = 50
+nuclear_playground.event_chance_cap = 69
+nuclear_playground.mutation_rate = 100
+nuclear_playground.default_mutation_rate = 100
+nuclear_playground.mutation_severity = 5
+nuclear_playground.infect_counter = 1
+
+thermonuclear_playground = Presets
+thermonuclear_playground.start_pop = 50
+thermonuclear_playground.event_chance_cap = 49
+thermonuclear_playground.mutation_rate = 500
+thermonuclear_playground.default_mutation_rate = 500
+thermonuclear_playground.mutation_severity = 25
+thermonuclear_playground.infect_counter = 0
 
 pause(1)
 line('Loaded')
