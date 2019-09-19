@@ -484,7 +484,7 @@ while True:
 
     average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
 
-    Virus_genome = [Virus.kill_chance, Virus.mutaion_chance]
+    Virus_genome = [Virus.kill_chance, Virus.mutaion_chance, Virus.infectiousness]
 
     #Dead creatures converted to food.
     print('    Dead creatures converted to food')
@@ -580,3 +580,4 @@ while True:
     if len(population) == 0:
         print("EVERY THING DIED")
         break
+    
