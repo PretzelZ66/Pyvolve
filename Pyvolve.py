@@ -467,9 +467,9 @@ while True:
         
         if Virus_Decider == 1:
             Virus.kill_chance += change
-        elif Virus_Decider == 1:
-            Virus.mutaion_chance += change
         elif Virus_Decider == 2:
+            Virus.mutaion_chance += change
+        elif Virus_Decider == 3:
             Virus.infectiousness +=  change
     
     #Get averages
