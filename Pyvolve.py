@@ -71,33 +71,6 @@ class Virus:
     kill_chance = 5
     mutaion_chance = 1
     infectiousness = 5
-    
-class Presets:
-    def __init__(self):
-        self.start_pop = 0
-        self.event_chance_cap = 0
-        self.mutation_rate = 0
-        self.default_mutation_rate = 0
-        self.mutation_severity = 0
-        self.infect_counter = 0
-
-
-#Preset Definition
-nuclear_playground = Presets
-nuclear_playground.start_pop = 50
-nuclear_playground.event_chance_cap = 69
-nuclear_playground.mutation_rate = 100
-nuclear_playground.default_mutation_rate = 100
-nuclear_playground.mutation_severity = 5
-nuclear_playground.infect_counter = 1
-
-thermonuclear_playground = Presets
-thermonuclear_playground.start_pop = 50
-thermonuclear_playground.event_chance_cap = 49
-thermonuclear_playground.mutation_rate = 500
-thermonuclear_playground.default_mutation_rate = 500
-thermonuclear_playground.mutation_severity = 25
-thermonuclear_playground.infect_counter = 0
 
 pause(1)
 line('Loaded')
@@ -117,6 +90,7 @@ line('What preset would you like to use? Default(0), Nuclear Playground(1), Ther
 preset_type = int(input('>>> '))
 
 if preset_type == 0:
+    #Default
     start_pop = 50
     event_chance_cap = 100
     mutation_rate = 1
@@ -125,20 +99,22 @@ if preset_type == 0:
     infect_counter = 1
     
 elif preset_type == 1:
-    start_pop = nuclear_playground.start_pop
-    event_chance_cap = nuclear_playground.event_chance_cap
-    mutation_rate = nuclear_playground.mutation_rate
-    default_mutation_rate = nuclear_playground.default_mutation_rate
-    mutation_severity = nuclear_playground.mutation_severity
-    infect_counter = nuclear_playground.infect_counter
+    #Nuclear_playground
+    start_pop = 50
+    event_chance_cap = 69
+    mutation_rate = 100
+    default_mutation_rate = 100
+    mutation_severity = 5
+    infect_counter = 1
 
 elif preset_type == 2:
-    start_pop = thermonuclear_playground.start_pop
-    event_chance_cap = thermonuclear_playground.event_chance_cap
-    mutation_rate = thermonuclear_playground.mutation_rate
-    default_mutation_rate = thermonuclear_playground.default_mutation_rate
-    mutation_severity = thermonuclear_playground.mutation_severity
-    infect_counter = thermonuclear_playground.infect_counter
+    #Thermonuclear_playground
+    start_pop = 50
+    event_chance_cap = 49
+    mutation_rate = 500
+    default_mutation_rate = 500
+    mutation_severity = 25
+    infect_counter = 0
     
 else:
     line('What would you like the starting population to be?')
