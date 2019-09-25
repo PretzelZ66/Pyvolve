@@ -210,12 +210,32 @@ while True:
             population[breedable_check].append(breedable)
         breedable_check += 1
         
+    #Event clocks
+    print('    Event Clocks')
+    if event_clock1 > 0:
+        event_clock1 -= 1
+        if event_clock1 == 0:
+            mutation_rate = default_mutation_rate
+    if event_clock2 > 0:
+        event_clock2 -= 1
+        print("AFTER SHOCK")
+        death_check = 0
+        while len(population) != death_check:
+            death_number = random.randint(1, 400)
+            if death_number == 13:
+                if population[death_check][12] == True and breedable_count > 2:
+                    del population[death_check]
+                    death_check -= 1
+                    deaths += 1
+                    breedable_count -= 1
+            death_check += 1
+        
     #Random Events
     print('    Random event check')
     event_done = ''
     event_check = random.randint(0, event_chance_cap)
     if event_check == 0:
-        event = random.randint(events, 6)
+        event = random.randint(events, 7)
         if event == 0:
             event_done = 'ENVIRONMENT STABILITY LOWERED'
             event_chance_cap -= 1
@@ -238,11 +258,11 @@ while True:
             event_clock1 += random.randint(10, 20)
         elif event == 4:
             event_done = 'VOLCANIC ERRUPTION'
-            temp_max += random.randint(5, 10)
-            temperature += random.randint(1, 5)
+            temp_max += random.randint(3, 5)
+            temperature -= random.randint(1, 3)
             death_check = 0
             while len(population) != death_check:
-                death_number = random.randint(1, 100)
+                death_number = random.randint(1, 250)
                 if death_number == 13:
                     if population[death_check][12] == True and breedable_count > 2:
                         del population[death_check]
@@ -255,6 +275,10 @@ while True:
             food -= random.randint(3000, 9000)
             if food <= 0:
                 food = 0
+            if foodupdown == -1:
+                fpg_cap -= 1000
+                if fpg_cap < 5000:
+                    fpg_cap = 5000
         elif event == 6:
             event_done = 'PLAGUE'
             Plague_check = 0
@@ -263,6 +287,19 @@ while True:
                 if death_number == 0:
                     population[Plague_check][11] = True
                     Plague_check += 1
+        elif event == 7:
+            event_done = 'EARTH QUAKE'
+            death_check = 0
+            while len(population) != death_check:
+                death_number = random.randint(1, 300)
+                if death_number == 13:
+                    if population[death_check][12] == True and breedable_count > 2:
+                        del population[death_check]
+                        death_check -= 1
+                        deaths += 1
+                        breedable_count -= 1
+                death_check += 1
+            event_clock2 += random.randint(1, 3)
         print(event_done)
         
     #Temperature Change
@@ -510,13 +547,6 @@ while True:
     offspring = []
     generation += 1
     breedable_count = 0
-    
-    #Event clocks
-    print('    Event Clocks')
-    if event_clock1 > 0:
-        event_clock1 -= 1
-        if event_clock1 == 0:
-            mutation_rate = default_mutation_rate
     
     #Facts
     print('---------------------------------------------')
