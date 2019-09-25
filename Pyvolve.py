@@ -209,7 +209,7 @@ while True:
             breedable = False
             population[breedable_check].append(breedable)
         breedable_check += 1
-        
+    
     #Event clocks
     print('    Event Clocks')
     if event_clock1 > 0:
@@ -218,7 +218,7 @@ while True:
             mutation_rate = default_mutation_rate
     if event_clock2 > 0:
         event_clock2 -= 1
-        print("AFTER SHOCK")
+        print("AFTERSHOCK")
         death_check = 0
         while len(population) != death_check:
             death_number = random.randint(1, 400)
@@ -288,7 +288,7 @@ while True:
                     population[Plague_check][11] = True
                     Plague_check += 1
         elif event == 7:
-            event_done = 'EARTH QUAKE'
+            event_done = 'EARTHQUAKE'
             death_check = 0
             while len(population) != death_check:
                 death_number = random.randint(1, 300)
