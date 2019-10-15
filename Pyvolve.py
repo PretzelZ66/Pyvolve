@@ -557,6 +557,7 @@ while True:
                 population[i][11] = False
 
     #Virus feeding/deaths
+    print('    Virus feeding and starvation')
     if Met_Clock == 0:
         for i in range(len(population)):
             if population[i][11] == True:
