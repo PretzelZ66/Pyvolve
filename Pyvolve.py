@@ -57,6 +57,8 @@ temp_max = 5
 
 events =  0
 event_clock1 = 0
+event_clock2 = 0
+event_clock3 = 0
 
 Avr_M = 0
 Avr_R = 0
@@ -196,7 +198,10 @@ while True:
         if event_clock1 == 0:
             mutation_rate = default_mutation_rate
     if event_clock2 > 0:
-        event_clock2 -= 1
+        event_clock2 -= 1 
+        temperature -= random.randint(1, 3)
+    if event_clock3 > 0:
+        event_clock3 -= 1
         print("AFTERSHOCK")
         death_check = 0
         while len(population) != death_check:
@@ -227,18 +232,21 @@ while True:
             event_done = 'LOW LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(2, 4)
             event_clock1 += random.randint(1, 10)
+            
         elif event == 2:
             event_done = 'MEDIUM LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(4, 6)
             event_clock1 += random.randint(5, 15)
+            
         elif event == 3:
             event_done = 'HIGH LEVEL RADIATION HAZARD'
             mutation_rate += random.randint(6, 8)
             event_clock1 += random.randint(10, 20)
+            
         elif event == 4:
             event_done = 'VOLCANIC ERRUPTION'
             temp_max += random.randint(3, 5)
-            temperature -= random.randint(1, 3)
+            temperature += random.randint(1, 3)
             death_check = 0
             while len(population) != death_check:
                 death_number = random.randint(1, 250)
@@ -249,6 +257,8 @@ while True:
                         deaths += 1
                         breedable_count -= 1
                 death_check += 1
+            event_clock2 += random.randint(2, 4)
+                
         elif event == 5:
             event_done = 'FAMINE'
             food -= random.randint(3000, 9000)
@@ -258,6 +268,7 @@ while True:
                 fpg_cap -= 1000
                 if fpg_cap < 5000:
                     fpg_cap = 5000
+                    
         elif event == 6:
             event_done = 'PLAGUE'
             Plague_check = 0
@@ -266,6 +277,7 @@ while True:
                 if death_number == 0:
                     population[Plague_check][11] = True
                     Plague_check += 1
+                    
         elif event == 7:
             event_done = 'EARTHQUAKE'
             death_check = 0
@@ -278,7 +290,7 @@ while True:
                         deaths += 1
                         breedable_count -= 1
                 death_check += 1
-            event_clock2 += random.randint(1, 3)
+            event_clock3 += random.randint(1, 3)
         print(event_done)
         
     #Temperature Change
