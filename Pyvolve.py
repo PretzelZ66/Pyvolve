@@ -345,6 +345,7 @@ while True:
             del population[Virus_check]
             Virus_check -= 1
             deaths += 1
+            Virus.food += random.randint(1, 3)
         Virus_check += 1
     
     #Deaths
@@ -509,6 +510,9 @@ while True:
     for x in range(deaths):
         if random.randint(1, 20) == 1:
             food += 1
+
+    #Virus feeding/deaths
+            
     #Virus Curing
     print('    Curing virus')
     for i in range(len(population)):
