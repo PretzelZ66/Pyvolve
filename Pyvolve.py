@@ -91,7 +91,7 @@ with open(file_name, 'x') as file:
 with open(file_name_raw, 'x') as file:
     file.close()
 
-line('What preset would you like to use? Default(0), Nuclear Playground(1), Thermonuclear Playground(2), Custom(OTHER)')
+line('''What preset would you like to use? Default(0), Nuclear Playground(1), Thermonuclear Playground(2), Virus Playground(3), Event Mayhem(4), Custom(OTHER)''')
 preset_type = int(input('>>> '))
 
 if preset_type == 0:
@@ -101,10 +101,10 @@ if preset_type == 0:
     mutation_rate = 1
     default_mutation_rate = mutation_rate
     mutation_severity = 1
-    infect_counter = 3
+    infect_counter = 1
     
 elif preset_type == 1:
-    #Nuclear_playground
+    #Nuclear playground
     start_pop = 50
     event_chance_cap = 69
     mutation_rate = 100
@@ -113,13 +113,37 @@ elif preset_type == 1:
     infect_counter = 1
 
 elif preset_type == 2:
-    #Thermonuclear_playground
+    #Thermonuclear playground
     start_pop = 50
     event_chance_cap = 49
     mutation_rate = 500
     default_mutation_rate = 500
     mutation_severity = 25
     infect_counter = 0
+
+elif preset_type == 3:
+    #Virus playground
+    start_pop = 50
+    event_chance_cap = 100
+    mutation_rate = 1
+    default_mutation_rate = mutation_rate
+    mutation_severity = 1
+    infect_counter = 50
+
+    Virus.kill_chance = 50
+    Virus.mutaion_chance = 10
+    Virus.infectiousness = 100
+    Virus.metabolism = 20
+    Virus.food = 1000
+
+elif preset_type == 4:
+    #Event Mayhem
+    start_pop = 50
+    event_chance_cap = 0
+    mutation_rate = 1
+    default_mutation_rate = mutation_rate
+    mutation_severity = 1
+    infect_counter = 50
     
 else:
     line('What would you like the starting population to be?')
@@ -157,7 +181,7 @@ while pop_gen_check != start_pop:
     population.append(pop_template)
     pop_gen_check += 1
 
-Virus.food = Virus.infected * 10
+Virus.food += Virus.infected * 10
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
