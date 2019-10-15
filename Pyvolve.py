@@ -68,9 +68,11 @@ Avr_B = 0
 
 class Virus:
     infected = 0
+    food = 0
     kill_chance = 5
     mutaion_chance = 1
     infectiousness = 5
+    metabolism = 3
 
 pause(1)
 line('Loaded')
@@ -83,6 +85,7 @@ file_name_raw = file_name + '_raw.txt'
 file_name += '.txt'
 with open(file_name, 'x') as file:
     file.close()
+    
 with open(file_name_raw, 'x') as file:
     file.close()
 
@@ -473,7 +476,7 @@ while True:
     #Virus Mutation
     print('    Mutating virus')
     if Virus.mutaion_chance >= random.randint(1, 100):
-        Virus_Decider = random.randint(1, 3)
+        Virus_Decider = random.randint(1, 4)
         change = random.randint(1, 2)
         if change == 2:
             change = -1
@@ -484,7 +487,9 @@ while True:
             Virus.mutaion_chance += change
         elif Virus_Decider == 3:
             Virus.infectiousness +=  change
-    
+        elif Virus_Decider == 4:
+            Virus.metabolism += change
+        
     #Get averages
     print('    Getting average genes')
     Avr_M = Avr_Gen(population, 0)
@@ -497,7 +502,7 @@ while True:
 
     average_genome = [Avr_M, Avr_R, Avr_T, Avr_D, Avr_A, Avr_S, Avr_B]
 
-    Virus_genome = [Virus.kill_chance, Virus.mutaion_chance, Virus.infectiousness]
+    Virus_genome = [Virus.kill_chance, Virus.mutaion_chance, Virus.infectiousness, Virus.metabolism]
 
     #Dead creatures converted to food.
     print('    Dead creatures converted to food')
@@ -586,4 +591,3 @@ while True:
     if len(population) == 0:
         print("EVERY THING DIED")
         break
-    
