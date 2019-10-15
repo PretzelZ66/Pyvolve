@@ -73,9 +73,9 @@ class Virus:
     food = 0
     kill_chance = 5
     mutaion_chance = 1
-    infectiousness = 5
+    infectiousness = 10
     metabolism = 3
-
+Met_Clock = Virus.metabolism
 pause(1)
 line('Loaded')
 print('')
@@ -101,7 +101,7 @@ if preset_type == 0:
     mutation_rate = 1
     default_mutation_rate = mutation_rate
     mutation_severity = 1
-    infect_counter = 1
+    infect_counter = 3
     
 elif preset_type == 1:
     #Nuclear_playground
@@ -156,6 +156,8 @@ while pop_gen_check != start_pop:
     pop_template = [M, R, T, D, A, S, B, age, fed, fatigue, b_c, contaminated]
     population.append(pop_template)
     pop_gen_check += 1
+
+Virus.food = Virus.infected * 10
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
@@ -522,8 +524,6 @@ while True:
     for x in range(deaths):
         if random.randint(1, 20) == 1:
             food += 1
-
-    #Virus feeding/deaths
             
     #Virus Curing
     print('    Curing virus')
@@ -531,6 +531,18 @@ while True:
         if population[i][11] == True:
             if random.randint(1, 100) == 1:
                 population[i][11] = False
+
+    #Virus feeding/deaths
+    if Met_Clock == 0:
+        for i in range(len(population)):
+            if population[i][11] == True:
+                if Virus.food >= 1:
+                    Virus.food -= 1
+            elif Virus.food == 0:
+                population[i][11] = False
+        Met_Clock = Virus.metabolism
+    else:
+        Met_Clock -= 1
     
     #Virus Check
     print('    Checking for virus')
