@@ -76,6 +76,7 @@ class Virus:
     infectiousness = 10
     metabolism = 3
 Met_Clock = Virus.metabolism
+
 pause(1)
 line('Loaded')
 print('')
@@ -91,7 +92,8 @@ with open(file_name, 'x') as file:
 with open(file_name_raw, 'x') as file:
     file.close()
 
-line('''What preset would you like to use? Default(0), Nuclear Playground(1), Thermonuclear Playground(2), Virus Playground(3), Event Mayhem(4), Custom(OTHER)''')
+line('''What preset would you like to use? Default(0), Nuclear Playground(1),
+Thermonuclear Playground(2), Virus Playground(3), Event Mayhem(4), Custom(OTHER)''')
 preset_type = int(input('>>> '))
 
 if preset_type == 0:
@@ -471,8 +473,8 @@ while True:
             baby.append(b_c)
             
             if breedable1[11] == True or breedable2[11] == True:
-                willinfect = random.randint(0, 99)
-                if willinfect <= Virus.infectiousness:
+                willinfect = random.randint(1, 100)
+                if willinfect >= Virus.infectiousness:
                     contaminated = True
             else:
                 contaminated = False
