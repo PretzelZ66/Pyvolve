@@ -4,14 +4,17 @@ print('LOADING')
 
 
 def pause(number):
+    """Pauses the program temporarily, for breaking up sections of text, or dramatic effect, etc"""
     time.sleep(number)
 
 
 def line(string):
+    """Displays a string, then pauses the program, so the user can read it"""
     print(string)
     pause(1)
 
 def avr_gen(the_list, gene_type):
+    """Obtains the average genome of the population"""
     gene_check = 0
     average = 0
     if len(the_list) != 0:
@@ -104,6 +107,7 @@ if preset_type == 0:
     default_mutation_rate = mutation_rate
     mutation_severity = 1
     infect_counter = 1
+    secrets = False
     
 elif preset_type == 1:
     #nuclear playground
@@ -113,6 +117,7 @@ elif preset_type == 1:
     default_mutation_rate = 100
     mutation_severity = 5
     infect_counter = 1
+    secrets = False
 
 elif preset_type == 2:
     #thermonuclear playground
@@ -122,6 +127,7 @@ elif preset_type == 2:
     default_mutation_rate = 500
     mutation_severity = 25
     infect_counter = 0
+    secrets = False
 
 elif preset_type == 3:
     #virus playground
@@ -131,12 +137,14 @@ elif preset_type == 3:
     default_mutation_rate = mutation_rate
     mutation_severity = 1
     infect_counter = 50
+    secrets = False
 
     cassowary.kill_chance = 50
     cassowary.mutaion_chance = 10
     cassowary.infectiousness = 100
     cassowary.metabolism = 20
     cassowary.food = 1000
+    secrets = False
 
 elif preset_type == 4:
     #event mayhem
@@ -146,6 +154,7 @@ elif preset_type == 4:
     default_mutation_rate = mutation_rate
     mutation_severity = 1
     infect_counter = 50
+    secrets = True
     
 else:
     line('WHAT WOULD YOU LIKE THE STARTING POPULATION TO BE?')
