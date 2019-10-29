@@ -247,7 +247,7 @@ while True:
     event_done = ''
     event_check = random.randint(0, event_chance_cap)
     if event_check == 0:
-        event = random.randint(events, 8)
+        event = random.randint(events, 7)
         if event == 0:
             event_done = 'ENVIRONMENT STABILITY LOWERED'
             event_chance_cap -= 1
