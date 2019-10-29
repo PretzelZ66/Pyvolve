@@ -68,14 +68,14 @@ avr_a = 0
 avr_s = 0
 avr_b = 0
 
-class virus:
+class cassowary:
     infected = 0
     food = 0
     kill_chance = 5
     mutaion_chance = 1
     infectiousness = 10
     metabolism = 3
-met_clock = virus.metabolism
+met_clock = cassowary.metabolism
 
 pause(1)
 line('LOADED')
@@ -132,11 +132,11 @@ elif preset_type == 3:
     mutation_severity = 1
     infect_counter = 50
 
-    virus.kill_chance = 50
-    virus.mutaion_chance = 10
-    virus.infectiousness = 100
-    virus.metabolism = 20
-    virus.food = 1000
+    cassowary.kill_chance = 50
+    cassowary.mutaion_chance = 10
+    cassowary.infectiousness = 100
+    cassowary.metabolism = 20
+    cassowary.food = 1000
 
 elif preset_type == 4:
     #event mayhem
@@ -173,9 +173,9 @@ else:
 
 pop_gen_check = 0
 while pop_gen_check != start_pop:
-    if infect_counter != virus.infected:
+    if infect_counter != cassowary.infected:
         contaminated = True
-        virus.infected += 1
+        cassowary.infected += 1
     else:
         contaminated = False
     
@@ -183,7 +183,7 @@ while pop_gen_check != start_pop:
     population.append(pop_template)
     pop_gen_check += 1
 
-virus.food += virus.infected * 10
+cassowary.food += cassowary.infected * 10
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
 
@@ -389,15 +389,15 @@ while True:
     
     #virus deaths
     print('    Virus Killing')
-    virus_check = 0
+    cassowary_check = 0
     for x in range(len(population)):
-        virus_chance = random.randint(1, 100)
-        if virus_chance <= virus.kill_chance:
-            del population[virus_check]
-            virus_check -= 1
+        cassowary_chance = random.randint(1, 100)
+        if cassowary_chance <= cassowary.kill_chance:
+            del population[cassowary_check]
+            cassowary_check -= 1
             deaths += 1
-            virus.food += random.randint(1, 3)
-        virus_check += 1
+            cassowary.food += random.randint(1, 3)
+        cassowary_check += 1
     
     #deaths
     print('    Deaths')
@@ -485,7 +485,7 @@ while True:
             
             if breedable1[11] is True or breedable2[11] is True:
                 willinfect = random.randint(1, 100)
-                if willinfect >= virus.infectiousness:
+                if willinfect >= cassowary.infectiousness:
                     contaminated = True
             else:
                 contaminated = False
@@ -527,20 +527,20 @@ while True:
     
     #virus mutation
     print('    Virus Mutation')
-    if virus.mutaion_chance >= random.randint(1, 100):
-        virus_decider = random.randint(1, 4)
+    if cassowary.mutaion_chance >= random.randint(1, 100):
+        cassowary_decider = random.randint(1, 4)
         change = random.randint(1, 2)
         if change == 2:
             change = -1
         
-        if virus_decider == 1:
-            virus.kill_chance += change
-        elif virus_decider == 2:
-            virus.mutaion_chance += change
-        elif virus_decider == 3:
-            virus.infectiousness +=  change
-        elif virus_decider == 4:
-            virus.metabolism += change
+        if cassowary_decider == 1:
+            cassowary.kill_chance += change
+        elif cassowary_decider == 2:
+            cassowary.mutaion_chance += change
+        elif cassowary_decider == 3:
+            cassowary.infectiousness +=  change
+        elif cassowary_decider == 4:
+            cassowary.metabolism += change
         
     #get averages
     print('    Obtaining Average Genome')
@@ -554,7 +554,7 @@ while True:
 
     average_genome = [avr_m, avr_r, avr_t, avr_d, avr_a, avr_s, avr_b]
 
-    virus_genome = [virus.kill_chance, virus.mutaion_chance, virus.infectiousness, virus.metabolism]
+    cassowary_genome = [cassowary.kill_chance, cassowary.mutaion_chance, cassowary.infectiousness, cassowary.metabolism]
 
     #dead creatures converted to food.
     print('    Converting Corpses To Food')
@@ -574,20 +574,20 @@ while True:
     if met_clock == 0:
         for i in range(len(population)):
             if population[i][11] is True:
-                if virus.food >= 1:
-                    virus.food -= 1
-            elif virus.food == 0:
+                if cassowary.food >= 1:
+                    cassowary.food -= 1
+            elif cassowary.food == 0:
                 population[i][11] = False
-        met_clock = virus.metabolism
+        met_clock = cassowary.metabolism
     else:
         met_clock -= 1
     
     #virus check
     print('    Diagnosing Virus')
-    virus.infected = 0
+    cassowary.infected = 0
     for i in range(len(population)):
         if population[i][11] is True:
-            virus.infected += 1
+            cassowary.infected += 1
     
     #resets
     print('    Techincal Resets')
@@ -607,9 +607,9 @@ while True:
         print("net growth: -100%")
     print(f'food: {food}')
     print(f'temperature: {temperature}')
-    print(f'virus infected: {virus.infected}')
+    print(f'virus infected: {cassowary.infected}')
     print(f'average genome: {average_genome}')
-    print(f'virus genome: {virus_genome}')
+    print(f'virus genome: {cassowary_genome}')
     print('---------------------------------------------')
     
     with open(file_name, 'a') as output:
@@ -623,9 +623,9 @@ while True:
             output.write("net growth: -100%\n")
         output.write(f'food: {food}\n')
         output.write(f'temperature: {temperature}\n')
-        output.write(f'infected: {virus.infected}\n')
+        output.write(f'infected: {cassowary.infected}\n')
         output.write(f'average genome: {average_genome}\n')
-        output.write(f'virus genome: {virus_genome}\n')
+        output.write(f'virus genome: {cassowary_genome}\n')
         if event_done != "":
             output.write(f'event: {event_done}\n')
         output.write('---------------------------------------------\n')
@@ -644,7 +644,7 @@ while True:
             output.write("-100%\n")
         output.write(f'{food}\n')
         output.write(f'{temperature}\n')
-        output.write(f'{virus.infected}\n')
+        output.write(f'{cassowary.infected}\n')
         output.write(f'{average_genome[0]}\n')
         output.write(f'{average_genome[1]}\n')
         output.write(f'{average_genome[2]}\n')
