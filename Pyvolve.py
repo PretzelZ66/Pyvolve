@@ -374,7 +374,7 @@ while True:
         temp_check += 1
     
     #fatigue down
-    print('   Fatigue Counter Decrease')
+    print('    Fatigue Counter Decrease')
     fatigue_check = 0
     for x in range(len(population)):
         if population[fatigue_check][9] > 0:
@@ -382,7 +382,7 @@ while True:
         fatigue_check += 1
     
     #feeding
-    print('   Feeding')
+    print('    Feeding')
     food_check = 0
     for x in range(len(population)):
         if population[food_check][8] == 0 and food > 0:
@@ -391,7 +391,7 @@ while True:
         food_check += 1
     
     #starvation check
-    print('   Starvation Check')
+    print('    Starvation Check')
     starve_check = 0
     for x in range(len(population)):
         if population[starve_check][8] == 0:
