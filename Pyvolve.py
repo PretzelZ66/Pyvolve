@@ -333,7 +333,7 @@ while True:
             
         if secrets is True:
             event = random.randint(0, 10000000000000000000000000000000000000000000000000000000000000000000000)
-            elif event == 011000110110000101110011011100110110111101110111011000010111001001111001:
+            if event == 8294398729834827345982:
                 event_done = 'CASSOWARY RAID'
                 death_check = 0
                 while len(population) != death_check:
