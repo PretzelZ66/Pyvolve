@@ -179,7 +179,8 @@ else:
 
     line('HOW MANY CREATURES SHOULD START OUT WITH THE VIRUS?')
     infect_counter = int(input('>>> '))
-
+    
+    secrets = False
 pop_gen_check = 0
 while pop_gen_check != start_pop:
     if infect_counter != Cassowary.infected:
@@ -329,16 +330,19 @@ while True:
                 death_check += 1
             event_clock3 += random.randint(1, 3)
 
-        elif event == 8:
-            event_done = 'CASSOWARY RAID'
-            death_check = 0
-            while len(population) != death_check:
-                death_number = random.randint(1, 10)
-                if death_number == 6:
-                    del population[death_check]
-                    death_check -=1
-                    deaths += 1
-                death_check += 1
+            
+        if secrets is True:
+            event = random.randint(0, 10000000000000000000000000000000000000000000000000000000000000000000000)
+            elif event == 011000110110000101110011011100110110111101110111011000010111001001111001:
+                event_done = 'CASSOWARY RAID'
+                death_check = 0
+                while len(population) != death_check:
+                    death_number = random.randint(1, 10)
+                    if death_number == 6:
+                        del population[death_check]
+                        death_check -=1
+                        deaths += 1
+                    death_check += 1
         print(event_done)
         
     #temperature change
