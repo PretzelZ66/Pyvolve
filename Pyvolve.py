@@ -1,4 +1,4 @@
-#pyvolve 1.2.0.51
+#pyvolve 1.2.0.52
 import time, random
 print('LOADING')
 
@@ -281,7 +281,7 @@ while True:
             mutation_rate += random.randint(6, 8)
             event_clock1 += random.randint(10, 20)
             
-         elif event == 4:
+        elif event == 4:
             event_done = 'VOLCANIC ERRUPTION'
             temp_max += random.randint(3, 5)
             temperature += random.randint(1, 3) * temp_rate
