@@ -1,4 +1,4 @@
-#pyvolve 1.2.0
+#pyvolve 1.2.0.51
 import time, random
 print('LOADING')
 
@@ -237,7 +237,7 @@ while True:
             mutation_rate = default_mutation_rate
     if event_clock2 > 0:
         event_clock2 -= 1 
-        temperature -= random.randint(1, 3)
+        temperature -= random.randint(1, 3) * temp_rate
     if event_clock3 > 0:
         event_clock3 -= 1
         print("Aftershock")
@@ -281,7 +281,7 @@ while True:
             mutation_rate += random.randint(6, 8)
             event_clock1 += random.randint(10, 20)
             
-        elif event == 4:
+         elif event == 4:
             event_done = 'VOLCANIC ERRUPTION'
             temp_max += random.randint(3, 5)
             temperature += random.randint(1, 3) * temp_rate
@@ -348,6 +348,9 @@ while True:
     #temperature change
     print('    Temperature Change')
     naturilisation = random.randint(0, 100)
+    temp_boost = random.randint(1, 10)
+    temp_boost /= 10
+    temp_rate += temp_boost
     
     if temp_state is True:
         if  naturilisation != 0:
@@ -373,7 +376,7 @@ while True:
         temp_max += random.randint(1, 2)
         temp_increase += 1
         temp_rate = 0.1 * temp_increase
-        
+    temp_rate -= temp_boost
     #temperature deaths
     print('    Temperature Deaths')
     temp_check = 0
