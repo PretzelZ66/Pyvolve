@@ -284,7 +284,7 @@ while True:
         elif event == 4:
             event_done = 'VOLCANIC ERRUPTION'
             temp_max += random.randint(3, 5)
-            temperature += random.randint(1, 3)
+            temperature += random.randint(1, 3) * temp_rate
             death_check = 0
             while len(population) != death_check:
                 death_number = random.randint(1, 250)
