@@ -347,10 +347,21 @@ while True:
         
     #temperature change
     print('    Temperature Change')
+    naturilisation = random.randint(0, 100)
+    
     if temp_state is True:
-        temperature += temp_rate
+        if  naturilisation != 0:
+            temperature += temp_rate
+            
+        else:
+            temperature -= temp_rate
+            
     elif temp_state is False:
-        temperature -= temp_rate
+        if  naturilisation != 0:
+            temperature -= temp_rate
+            
+        else:
+            temperature += temp_rate
 
     if temperature >= temp_max or temperature <= 0-temp_max:
         if temp_state is True:
