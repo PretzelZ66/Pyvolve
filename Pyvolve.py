@@ -1,4 +1,4 @@
-#pyvolve 1.2.0.52
+#pyvolve 1.2.0.53
 import time, random
 print('LOADING')
 
@@ -377,6 +377,7 @@ while True:
         temp_increase += 1
         temp_rate = 0.1 * temp_increase
     temp_rate -= temp_boost
+    
     #temperature deaths
     print('    Temperature Deaths')
     temp_check = 0
