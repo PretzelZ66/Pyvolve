@@ -1,3 +1,4 @@
 # Pyvolve
 Pyvolve is a simple natural simulation which is designed to showcase the effects of different conditions on a population, through a process known as natural selection.
-Pyvolve.py is the full program, with all features implemented, and then some. It currently has no generation limit, and a CHANGABLE variables like the population and event chance
+Pyvolve boasts an unlimited generation limit, a 7 gene creature, a 4 gene virus, a variety of events, and several preset simulation parameters, or your own custom parameters! Pyvolve also outputs its data to two different files, one which is human readable, and the other used in the file grapher. The file grapher puts data into an Excel Spreadsheet, and automatically generates a few graphs!
+We hope you enjoy using Pyvolve!
