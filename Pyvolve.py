@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.1
+#pyvolve 1.2.1.2
 import time, random
 print('LOADING')
 
@@ -624,7 +624,7 @@ while True:
             Cassowary.infected += 1
     
     #resets
-    print('    Techincal Resets')
+    print('    Technical Resets')
     offspring = []
     generation += 1
     breedable_count = 0
