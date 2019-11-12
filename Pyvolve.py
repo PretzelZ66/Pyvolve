@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.2
+#pyvolve 1.2.3.0
 import time, random
 print('LOADING')
 
@@ -332,8 +332,8 @@ while True:
 
             
         if secrets is True:
-            event = random.randint(0, 10000000000000000000000000000000000000000000000000000000000000000000000)
-            if event == 8294398729834827345982:
+            event = random.randint(0, 1000000000000000000000000000000000) #Decillion
+            if event == 679711511511111997114121:
                 event_done = 'CASSOWARY RAID'
                 death_check = 0
                 while len(population) != death_check:
@@ -631,14 +631,14 @@ while True:
     
     #facts
     print('---------------------------------------------')
-    print(f'generation: {generation}')
-    print(f"population: {len(population)}")
-    print(f"deaths: {deaths}")
-    print(f"births: {births}")
+    print(f'Generation: {generation}')
+    print(f"Population: {len(population)}")
+    print(f"Deaths: {deaths}")
+    print(f"Births: {births}")
     if len(population) != 0:
-        print(f"Net Growth: {(births - deaths)/len(population)}%")
+        print(f"Net growth: {(births - deaths)/len(population)}%")
     else:
-        print("Net Growth: -100%")
+        print("Net growth: -100%")
     print(f'Food: {food}')
     print(f'Temperature: {temperature}')
     print(f'Virus Infected: {Cassowary.infected}')
@@ -652,7 +652,7 @@ while True:
         output.write(f"Deaths: {deaths}\n")
         output.write(f'Births: {births}\n')
         if len(population) != 0:
-            output.write(f'Net Growth: {(births - deaths)/len(population)}%\n')
+            output.write(f'Net growth: {(births - deaths)/len(population)}%\n')
         else:
             output.write("Net growth: -100%\n")
         output.write(f'Food: {food}\n')
@@ -664,7 +664,7 @@ while True:
             output.write(f'Event: {event_done}\n')
         output.write('---------------------------------------------\n')
         if len(population) == 0:
-            output.write("EVERTHING DIED\n")
+            output.write("Every Thing Died\n")
         output.close()
     
     with open(file_name_raw, 'a') as output:
