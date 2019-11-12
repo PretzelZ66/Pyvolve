@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.0
+#pyvolve 1.2.1.1
 import time, random
 print('LOADING')
 
@@ -636,35 +636,35 @@ while True:
     print(f"deaths: {deaths}")
     print(f"births: {births}")
     if len(population) != 0:
-        print(f"net growth: {(births - deaths)/len(population)}%")
+        print(f"Net Growth: {(births - deaths)/len(population)}%")
     else:
-        print("net growth: -100%")
-    print(f'food: {food}')
-    print(f'temperature: {temperature}')
-    print(f'virus infected: {Cassowary.infected}')
-    print(f'average genome: {average_genome}')
-    print(f'virus genome: {Cassowary_genome}')
+        print("Net Growth: -100%")
+    print(f'Food: {food}')
+    print(f'Temperature: {temperature}')
+    print(f'Virus Infected: {Cassowary.infected}')
+    print(f'Average Genome: {average_genome}')
+    print(f'Virus Genome: {Cassowary_genome}')
     print('---------------------------------------------')
     
     with open(file_name, 'a') as output:
-        output.write(f'generation: {generation}\n')
-        output.write(f'population: {len(population)}\n')
-        output.write(f"deaths: {deaths}\n")
-        output.write(f'births: {births}\n')
+        output.write(f'Generation: {generation}\n')
+        output.write(f'Population: {len(population)}\n')
+        output.write(f"Deaths: {deaths}\n")
+        output.write(f'Births: {births}\n')
         if len(population) != 0:
-            output.write(f'net growth: {(births - deaths)/len(population)}%\n')
+            output.write(f'Net Growth: {(births - deaths)/len(population)}%\n')
         else:
-            output.write("net growth: -100%\n")
-        output.write(f'food: {food}\n')
-        output.write(f'temperature: {temperature}\n')
-        output.write(f'infected: {Cassowary.infected}\n')
-        output.write(f'average genome: {average_genome}\n')
-        output.write(f'virus genome: {Cassowary_genome}\n')
+            output.write("Net growth: -100%\n")
+        output.write(f'Food: {food}\n')
+        output.write(f'Temperature: {temperature}\n')
+        output.write(f'Infected: {Cassowary.infected}\n')
+        output.write(f'Average Genome: {average_genome}\n')
+        output.write(f'Virus Genome: {Cassowary_genome}\n')
         if event_done != "":
-            output.write(f'event: {event_done}\n')
+            output.write(f'Event: {event_done}\n')
         output.write('---------------------------------------------\n')
         if len(population) == 0:
-            output.write("every thing died\n")
+            output.write("EVERTHING DIED\n")
         output.close()
     
     with open(file_name_raw, 'a') as output:
