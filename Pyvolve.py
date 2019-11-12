@@ -1,4 +1,4 @@
-#pyvolve 1.2.0
+#pyvolve 1.2.1.0
 import time, random
 print('LOADING')
 
@@ -366,16 +366,22 @@ while True:
         else:
             temperature += temp_rate
 
-    if temperature >= temp_max or temperature <= 0-temp_max:
-        if temp_state is True:
+    if temperature >= temp_max:
+        if temp_state:
             temperature = temp_max
             temp_state = False
-        else:
+            temp_max += random.randint(1, 2)
+            temp_increase += 1
+            temp_rate = 0.1 * temp_increase
+        
+    if temperature <= 0-temp_max:
+        if not temp_state:
             temperature = 0-temp_max
             temp_state = True
-        temp_max += random.randint(1, 2)
-        temp_increase += 1
-        temp_rate = 0.1 * temp_increase
+            temp_max += random.randint(1, 2)
+            temp_increase += 1
+            temp_rate = 0.1 * temp_increase
+            
     temp_rate -= temp_boost
     
     #temperature deaths
