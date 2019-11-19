@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.4
+#pyvolve 1.2.1.5
 import time, random
 print('LOADING')
 
@@ -348,41 +348,38 @@ while True:
     #temperature change
     print('    Temperature Change')
     
-    temp_boost = random.randint(-5, 5) / 10
+    temp_rate = 0.1 * temp_increase
+    temp_boost = (random.randint((0-(temp_max//2)), (temp_max // 2)) * 0.1)
     temp_rate += temp_boost
-    
     naturilisation = random.randint(0, 100)
-    if temp_state == True:
-        if  naturilisation != 0:
-            temperature += temp_rate
-        else:
-            temperature -= temp_rate
-            
-    elif temp_state == False:
-        if  naturilisation != 0:
-            temperature -= temp_rate
-        else:
-            temperature += temp_rate
 
+        #Temp Change
+    if temp_state == True:
+        if naturilisation == 0:
+            temperature -= temp_rate
+            print("na")
+        else:
+            temperature += temp_rate
+    elif temp_state == False:
+        if naturilisation == 0:
+            temperature += temp_rate
+            print("na")
+        else:
+            temperature -= temp_rate
+    
+        #Temp Max Change
     if temperature >= temp_max:
         if temp_state == True:
-            temperature = temp_max
             temp_state = False
-            temp_max_incress = random.randint(5, 20) / 10
-            temp_max += temp_max_incress
+            temperature = temp_max
+            temp_max += (random.randint(5, 20) * 0.1)
             temp_increase += 1
-            temp_rate = 0.1 * temp_increase
-        
     elif temperature <= (0 - temp_max):
         if temp_state == False:
-            temperature = 0 - temp_max
             temp_state = True
-            temp_max_incress = random.randint(5, 20) / 10
-            temp_max += temp_max_incress
+            temperature = (0 - temp_max)
+            temp_max += (random.randint(5, 20))
             temp_increase += 1
-            temp_rate = 0.1 * temp_increase
-            
-    temp_rate -= temp_boost
     
     #temperature deaths
     print('    Temperature Deaths')
