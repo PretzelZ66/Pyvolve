@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.5
+#pyvolve 1.2.1.4
 import time, random
 print('LOADING')
 
@@ -86,25 +86,35 @@ print('')
 line('~~CUSTOMISABLE SIMULATION PARAMETERS~~')
 
 line('WHAT WOULD YOU LIKE TO CALL THE RESULTS FILE?')
-file_name = input('>>> ')
-file_name_raw = file_name + '_raw.txt'
-file_name += '.txt'
-with open(file_name, 'x') as file:
-    file.close()
-    
-with open(file_name_raw, 'x') as file:
-    file.close()
+while True:
+    try:
+        file_name = input('>>> ')
+        file_name_raw = file_name + '_raw.txt'
+        file_name += '.txt'
+        with open(file_name, 'x') as file:
+            file.close()
+            
+        with open(file_name_raw, 'x') as file:
+            file.close()
+        break
+    except FileExistsError:
+        print("File Taken. Try again")
 
 line('''WHAT PRESET WOULD YOU LIKE TO USE? DEFAULT(0), NUCLEAR PLAYGROUND(1),
-THERMONUCLEAR PLAYGROUND(2), VIRUS PLAYGROUND(3), EVENT MAYHEM(4), CUSTOM(OTHER)''')
-preset_type = int(input('>>> '))
+   THERMONUCLEAR PLAYGROUND(2), VIRUS PLAYGROUND(3), EVENT MAYHEM(4), CUSTOM(OTHER_NUM)''')
+while True:
+    try:
+        preset_type = int(input('>>> '))
+        break
+    except ValueError:
+        print("Invalid number. Try again")
 
 if preset_type == 0:
     #default
     start_pop = 50
     event_chance_cap = 100
     mutation_rate = 1
-    default_mutation_rate = mutation_rate
+    default_mutation_rate = 1
     mutation_severity = 1
     infect_counter = 1
     secrets = False
@@ -134,7 +144,7 @@ elif preset_type == 3:
     start_pop = 50
     event_chance_cap = 100
     mutation_rate = 1
-    default_mutation_rate = mutation_rate
+    default_mutation_rate = 1
     mutation_severity = 1
     infect_counter = 50
     secrets = False
@@ -151,36 +161,63 @@ elif preset_type == 4:
     start_pop = 50
     event_chance_cap = 0
     mutation_rate = 1
-    default_mutation_rate = mutation_rate
+    default_mutation_rate = 1
     mutation_severity = 1
     infect_counter = 50
     secrets = True
     
 else:
     line('WHAT WOULD YOU LIKE THE STARTING POPULATION TO BE?')
-    start_pop = int(input('>>> '))
-    if start_pop <= 1:
-        start_pop = 2
+    while True:
+        try:
+            start_pop = int(input('>>> '))
+            if start_pop <= 1:
+                start_pop = 2
+            break
+        except ValueError:
+            print("Invalid number. Try again")    
 
     line('WOULD YOU LIKE A LOW (3), MEDIUM (2), or HIGH (1) EVENT CHANCE?')
-    event_chance = int(input('1/2/3 >>> '))
-    if event_chance > 0 and event_chance <= 3:
-        event_chance_cap = event_chance
-    else:
-        event_chance_cap = 2
-    event_chance_cap = event_chance_cap * 50
+    while True:
+        try:
+            event_chance = int(input('1/2/3 >>> '))
+            if event_chance > 0 and event_chance <= 3:
+                event_chance_cap = event_chance
+            else:
+                event_chance_cap = 2
+            event_chance_cap = event_chance_cap * 50
+            break
+        except ValueError:
+            print("Invalid number. Try again")  
     
     line('WHAT WOULD YOU LIKE THE DEFAULT RADIATION LEVEL TO BE?')
-    mutation_rate = int(input('>>> '))
-    default_mutation_rate = mutation_rate
+    while True:
+        try:
+            mutation_rate = int(input('>>> '))
+            default_mutation_rate = mutation_rate
+            break
+        except ValueError:
+            print("Invalid number. Try again")
 
     line('WHAT WOULD YOU LIKE THE MUTATION SEVERITY TO BE?')
-    mutation_severity = int(input('>>> '))
+    while True:
+        try:
+            mutation_severity = int(input('>>> '))
+            break
+        except ValueError:
+            print("Invalid number. Try again")
+    
 
     line('HOW MANY CREATURES SHOULD START OUT WITH THE VIRUS?')
-    infect_counter = int(input('>>> '))
+    while True:
+        try:
+            infect_counter = int(input('>>> '))
+            break
+        except ValueError:
+            print("Invalid number. Try again")
     
     secrets = False
+    
 pop_gen_check = 0
 while pop_gen_check != start_pop:
     if infect_counter != Cassowary.infected:
@@ -196,6 +233,8 @@ while pop_gen_check != start_pop:
 Cassowary.food += Cassowary.infected * 10
 
 line('~~SIMULATION PARAMETERS HAVE BEEN SET~~')
+
+print('---------------------------------------------')
 
 while True:
     deaths = 0
@@ -332,7 +371,7 @@ while True:
 
             
         if secrets is True:
-            event = random.randint(0, 1000000000000000000000000000000000) #Decillion
+            event = random.randint(1, 1000000000000000000000000000000000) #1/1 Decillion
             if event == 679711511511111997114121:
                 event_done = 'CASSOWARY RAID'
                 death_check = 0
@@ -349,7 +388,7 @@ while True:
     print('    Temperature Change')
     
     temp_rate = 0.1 * temp_increase
-    temp_boost = (random.randint((0-(temp_max//2)), (temp_max // 2)) * 0.1)
+    temp_boost = (random.randint(-5, 5) * 0.1)
     temp_rate += temp_boost
     naturilisation = random.randint(0, 100)
 
@@ -378,7 +417,7 @@ while True:
         if temp_state == False:
             temp_state = True
             temperature = (0 - temp_max)
-            temp_max += (random.randint(5, 20))
+            temp_max += (random.randint(5, 20) * 0.1)
             temp_increase += 1
     
     #temperature deaths
