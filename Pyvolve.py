@@ -390,7 +390,7 @@ while True:
     temp_rate = 0.1 * temp_increase
     temp_boost = (random.randint(-5, 5) * 0.1)
     temp_rate += temp_boost
-    naturilisation = random.randint(0, 100)
+    naturilisation = random.randint(0, 50)
 
         #Temp Change
     if temp_state == True:
