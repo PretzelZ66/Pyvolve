@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.4
+#pyvolve 1.2.1.5
 import time, random
 print('LOADING')
 
@@ -140,7 +140,7 @@ elif preset_type == 2:
     secrets = False
 
 elif preset_type == 3:
-    #virus playground
+    #RapiVirus
     start_pop = 50
     event_chance_cap = 100
     mutation_rate = 1
@@ -347,7 +347,7 @@ while True:
                     fpg_cap = 5000
                     
         elif event == 6:
-            event_done = 'PLAGUE'
+            event_done = 'NEW CORONAVIRUS STRAIN'
             plague_check = 0
             while len(population) != plague_check:
                 death_number = random.randint(0, 100)
@@ -612,7 +612,7 @@ while True:
         elif Cassowary_decider == 4:
             Cassowary.metabolism += change
         
-    #get averages
+    #Obtain Average Genome
     print('    Obtaining Average Genome')
     avr_m = avr_gen(population, 0)
     avr_r = avr_gen(population, 1)
@@ -653,13 +653,13 @@ while True:
         met_clock -= 1
     
     #virus check
-    print('    Diagnosing Virus')
+    print('    Diagnosing Coronavirus')
     Cassowary.infected = 0
     for i in range(len(population)):
         if population[i][11] is True:
             Cassowary.infected += 1
     
-    #resets
+    #technical resets
     print('    Technical Resets')
     offspring = []
     generation += 1
