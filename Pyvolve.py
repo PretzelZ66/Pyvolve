@@ -1,4 +1,4 @@
-#pyvolve 1.2.1.5
+#pyvolve 1.2.1.6
 import time, random
 print('LOADING')
 
@@ -347,8 +347,15 @@ while True:
                     fpg_cap = 5000
                     
         elif event == 6:
-            event_done = 'NEW CORONAVIRUS STRAIN'
-            plague_check = 0
+			if secrets == True:
+				easter_egg = random.randint(0, 100)
+				if easter_egg = 19:
+					event_done = 'NEW CORONAVIRUS STRAIN'
+				else:
+					event_done = 'PLAGUE'
+			else:
+				event_done = 'PLAGUE'
+				plague_check = 0
             while len(population) != plague_check:
                 death_number = random.randint(0, 100)
                 if death_number == 0:
