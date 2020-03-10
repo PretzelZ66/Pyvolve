@@ -345,14 +345,14 @@ while True:
                 fpg_cap -= 1000
                 if fpg_cap < 5000:
                     fpg_cap = 5000
-                    
+
         elif event == 6:
-			if secrets == True:
+		    if secrets == True:
 				easter_egg = random.randint(0, 100)
-				if easter_egg = 19:
-					event_done = 'NEW CORONAVIRUS STRAIN'
-				else:
-					event_done = 'PLAGUE'
+			    if easter_egg = 19:
+				    event_done = 'NEW CORONAVIRUS STRAIN'
+			    else:
+				    event_done = 'PLAGUE'
 			else:
 				event_done = 'PLAGUE'
 				plague_check = 0
